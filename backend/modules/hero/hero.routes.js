@@ -1,0 +1,16 @@
+const express = require("express");
+const auth = require("../../middleware/auth");
+const upload = require("../../middleware/upload");
+const createHero = require("./controllers/createHero");
+const getHero = require("./controllers/getHero");
+const getHeroById = require("./controllers/getHeroById");
+const delHero = require("./controllers/delHero");
+const editHero = require("./controllers/editHero");
+const heroRouter = express.Router();
+heroRouter.get("/", getHero);
+heroRouter.get("/:heroId", getHeroById);
+heroRouter.use(auth);
+heroRouter.post("/create", upload, createHero);
+heroRouter.delete("/del/:heroId", delHero);
+heroRouter.patch("/edit/:heroId", upload, editHero);
+module.exports = heroRouter;

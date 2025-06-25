@@ -7,8 +7,12 @@ require("dotenv").config();
 // Routes
 const login = require("./handlers/login.js");
 const { forgotPassword, resetPassword } = require("./handlers/forgotPass.js");
+const heroRouter = require("./modules/hero/hero.routes.js");
+const subSectionRouter = require("./modules/subSection/subSection.routes.js");
 // Models
 require("./models/userModel.js");
+require("./models/heroModel.js");
+require("./models/subSection.js");
 // Initialize Express
 const app = express();
 
