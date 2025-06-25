@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@theme {
+  /* --color-primary: #06176f;
+  --color-secondary: #ffffff;
+  --color-accent: #d32f2f;
+  --color-support: #00aeef;
+  --color-text: #212121;
+  --color-grey: #f4f6f8;
+  --color-bg: #f5f5f5; */
+}
+.font-primary {
+  font-family: Lato;
+}
+.font-secondary {
+  font-family: Merriweather;
+}
