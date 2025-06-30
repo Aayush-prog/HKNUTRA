@@ -10,7 +10,7 @@ const getHeroById = async (req, res) => {
         message: "Hero not found",
       });
     }
-    res.satus(201).json({
+    res.status(200).json({
       status: "success",
       message: "Hero found successfully",
       data: hero,

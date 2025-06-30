@@ -1,0 +1,16 @@
+const express = require("express");
+const auth = require("../../middleware/auth");
+const upload = require("../../middleware/upload");
+const createEvent = require("./controllers/createEvent");
+const getEvent = require("./controllers/getEvent");
+const getEventById = require("./controllers/getEventById");
+const delEvent = require("./controllers/delEvent");
+const editEvent = require("./controllers/editEvent");
+const eventRouter = express.Router();
+eventRouter.get("/", getEvent);
+eventRouter.get("/:eventId", getEventById);
+eventRouter.use(auth);
+eventRouter.post("/create", upload, createEvent);
+eventRouter.delete("/del/:eventId", delEvent);
+eventRouter.patch("/edit/:eventId", upload, editEvent);
+module.exports = eventRouter;

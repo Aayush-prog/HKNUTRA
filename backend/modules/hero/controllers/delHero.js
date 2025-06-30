@@ -12,7 +12,7 @@ const delHero = async (req, res) => {
       });
     }
     const delHero = await HeroModel.findByIdAndDelete(heroId);
-    res.satus(201).json({
+    res.status(200).json({
       status: "success",
       message: "Hero deleted successfully",
     });

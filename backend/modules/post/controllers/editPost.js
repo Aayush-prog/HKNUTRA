@@ -1,31 +1,31 @@
 const mongoose = require("mongoose");
 const path = require("path");
 const delImage = require("../../../handlers/delImage");
-const editHero = async (req, res) => {
-  const HeroModel = mongoose.model("Hero");
+const editPost = async (req, res) => {
+  const PostModel = mongoose.model("Post");
   const { title, body } = req.body;
   const image = req.files?.image?.[0]
     ? path.basename(req.files.image[0].path)
     : null;
-  const { heroId } = req.params;
+  const { postId } = req.params;
   try {
-    const hero = await HeroModel.findById(heroId);
-    if (!hero) {
+    const post = await PostModel.findById(postId);
+    if (!post) {
       return res.status(404).json({
         status: "error",
-        message: "Hero not found",
+        message: "Post not found",
       });
     }
-    let updatedHero;
+    let updatedPost;
     if (image != null) {
-      delImage(hero.image);
-      updatedHero = await HeroModel.findByIdAndUpdate(heroId, {
+      delImage(post.image);
+      updatedPost = await PostModel.findByIdAndUpdate(postId, {
         title,
         image,
         body,
       });
     } else {
-      updatedHero = await HeroModel.findByIdAndUpdate(heroId, {
+      updatedPost = await PostModel.findByIdAndUpdate(postId, {
         title,
         body,
       });
@@ -33,7 +33,7 @@ const editHero = async (req, res) => {
 
     res.status(200).json({
       status: "success",
-      message: "Hero updated successfully",
+      message: "Post updated successfully",
     });
   } catch (error) {
     res.status(400).json({
@@ -42,4 +42,4 @@ const editHero = async (req, res) => {
     });
   }
 };
-module.exports = editHero;
+module.exports = editPost;

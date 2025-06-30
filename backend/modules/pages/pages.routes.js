@@ -1,0 +1,16 @@
+const express = require("express");
+const auth = require("../../middleware/auth");
+const pageRouter = express.Router();
+const getLanding = require("./controller/getLanding");
+const getAbout = require("./controller/getAbout");
+const getCommunity = require("./controller/getCommunity");
+const getContactPage = require("./controller/getContactPage");
+const getEventPage = require("./controller/getEventPage");
+const getMembership = require("./controller/getMembership");
+pageRouter.get("/about", getAbout);
+pageRouter.get("/landing", getLanding);
+pageRouter.get("/community", getCommunity);
+pageRouter.get("/contact", getContactPage);
+pageRouter.get("/event", getEventPage);
+pageRouter.get("/membership", getMembership);
+module.exports = pageRouter;

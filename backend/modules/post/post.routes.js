@@ -1,0 +1,16 @@
+const express = require("express");
+const auth = require("../../middleware/auth");
+const upload = require("../../middleware/upload");
+const createPost = require("./controllers/createPost");
+const getPost = require("./controllers/getPost");
+const getPostById = require("./controllers/getPostById");
+const delPost = require("./controllers/delPost");
+const editPost = require("./controllers/editPost");
+const postRouter = express.Router();
+postRouter.get("/", getPost);
+postRouter.get("/:postId", getPostById);
+postRouter.use(auth);
+postRouter.post("/create", upload, createPost);
+postRouter.delete("/del/:postId", delPost);
+postRouter.patch("/edit/:postId", upload, editPost);
+module.exports = postRouter;
