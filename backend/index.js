@@ -12,6 +12,7 @@ const subSectionRouter = require("./modules/subSection/subSection.routes.js");
 const postRouter = require("./modules/post/post.routes.js");
 const eventRouter = require("./modules/event/event.routes.js");
 const personRouter = require("./modules/person/person.routes.js");
+const contactRouter = require("./modules/contact/contact.routes.js");
 // Models
 require("./models/userModel.js");
 require("./models/heroModel.js");
@@ -20,6 +21,7 @@ require("./models/PageModel.js");
 require("./models/eventModel.js");
 require("./models/personModel.js");
 require("./models/postModel.js");
+require("./models/contactModel.js");
 // Initialize Express
 const app = express();
 
@@ -43,6 +45,7 @@ app.use("/event", eventRouter);
 app.use("/hero", heroRouter);
 app.use("subSection", subSectionRouter);
 app.use("/person", personRouter);
+app.use("/contact", contactRouter);
 // Start the server
 app.listen(8000, () => {
   console.log("Server started on port 8000");

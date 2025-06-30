@@ -1,0 +1,16 @@
+const express = require("express");
+const auth = require("../../middleware/auth");
+const createEyeCareCenter = require("./controllers/createContact");
+const getContact = require("./controllers/getContact");
+const getContactById = require("./controllers/getContactById");
+const delContact = require("./controllers/delContact");
+const editContact = require("./controllers/editContact");
+const upload = require("../../middleware/upload");
+const contactRouter = express.Router();
+contactRouter.get("/", getContact);
+contactRouter.get("/:contactId", getContactById);
+contactRouter.use(auth);
+contactRouter.post("/create", upload, createEyeCareCenter);
+contactRouter.delete("/del/:contactId", delContact);
+contactRouter.patch("/edit/:contactId", upload, editContact);
+module.exports = contactRouter;
