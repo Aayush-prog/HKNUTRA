@@ -3,10 +3,11 @@ const path = require("path");
 const deleteImage = require("../../../handlers/delImage");
 const editSubSection = async (req, res) => {
   const SubSectionModel = mongoose.model("SubSection");
-  const { title, body, imageDeleted } = req.body;
+  const { title, body, imageDeleted, body2, variant, alignment } = req.body;
   const image = req.files?.image?.[0]
     ? path.basename(req.files.image[0].path)
     : null;
+  const images = req.files?.images?.map((image) => path.basename(image.path));
   const { subSectionId } = req.params;
   try {
     const subSection = await SubSectionModel.findById(subSectionId);
@@ -24,16 +25,19 @@ const editSubSection = async (req, res) => {
         { title, body, image }
       );
     }
-    if (image) {
+    if (image || images) {
       deleteImage(subSection.image);
       updatedSubSection = await SubSectionModel.findByIdAndUpdate(
         subSectionId,
-        { title, image, body }
+        { title, image, images, body, body2, variant, alignment }
       );
     }
     updatedSubSection = await SubSectionModel.findByIdAndUpdate(subSectionId, {
       title,
       body,
+      body2,
+      variant,
+      alignment,
     });
     res.status(200).json({
       status: "success",
