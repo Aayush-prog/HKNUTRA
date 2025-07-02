@@ -1,7 +1,10 @@
+import HeroSection from "../components/HeroSection";
+import SubSection from "../components/SubSection";
 export default function Home() {
   return (
     <div>
-      <h3>home.</h3>
+      <HeroSection />
+      <SubSection body={"lorem"} images={["logoGreen.png", "logoGreen.png"]} />
     </div>
   );
 }
