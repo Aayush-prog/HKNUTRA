@@ -43,16 +43,13 @@ export default function Navbar() {
               </NavLink>
             </li>
           ))}
-          <li>
-            <button
-              onClick={() => navigate("/login")}
-              className="ml-2 px-4 py-1 bg-primary text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
-            >
-              Join Now
-            </button>
-          </li>
         </ul>
-
+        <button
+          onClick={() => navigate("/login")}
+          className="hidden md:block ml-2 px-4 py-1 bg-primary text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+          Join Now
+        </button>
         {/* Mobile menu button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
