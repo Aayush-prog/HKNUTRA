@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const getEvent = async (req, res) => {
   const EventModel = mongoose.model("Event");
   try {
-    const event = await EventModel.find().sort({
+    const event = await EventModel.find({ complete: false }).sort({
       createdAt: -1,
     });
     res.status(200).json({

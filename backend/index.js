@@ -13,6 +13,7 @@ const postRouter = require("./modules/post/post.routes.js");
 const eventRouter = require("./modules/event/event.routes.js");
 const personRouter = require("./modules/person/person.routes.js");
 const contactRouter = require("./modules/contact/contact.routes.js");
+const missionRouter = require("./modules/mission/mission.routes.js");
 // Models
 require("./models/userModel.js");
 require("./models/heroModel.js");
@@ -22,6 +23,7 @@ require("./models/eventModel.js");
 require("./models/personModel.js");
 require("./models/postModel.js");
 require("./models/contactModel.js");
+require("./models/missionModel.js");
 // Initialize Express
 const app = express();
 
@@ -43,7 +45,8 @@ app.post("/resetPass/:token", resetPassword);
 app.use("/post", postRouter);
 app.use("/event", eventRouter);
 app.use("/hero", heroRouter);
-app.use("subSection", subSectionRouter);
+app.use("/mission", missionRouter);
+app.use("/subSection", subSectionRouter);
 app.use("/person", personRouter);
 app.use("/contact", contactRouter);
 // Start the server

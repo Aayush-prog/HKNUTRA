@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
-const getPost = async (req, res) => {
-  const PostModel = mongoose.model("Post");
+const getPastEvent = async (req, res) => {
+  const EventModel = mongoose.model("Event");
   try {
-    const posts = await PostModel.find().sort({
+    const event = await EventModel.find({ complete: true }).sort({
       createdAt: -1,
     });
     res.status(200).json({
       status: "success",
-      message: "Post found successfully",
-      data: posts,
+      message: "Event found successfully",
+      data: event,
     });
   } catch (error) {
     res.status(400).json({
@@ -17,4 +17,4 @@ const getPost = async (req, res) => {
     });
   }
 };
-module.exports = getPost;
+module.exports = getPastEvent;

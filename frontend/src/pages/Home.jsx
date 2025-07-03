@@ -3,7 +3,7 @@ import SubSection from "../components/SubSection";
 export default function Home() {
   return (
     <div>
-      <HeroSection />
+      <HeroSection title={"Welcome to HKNUTRA"} />
       <SubSection
         body={"lorem dkjas"}
         images={["logoGreen.png", "logoGreen.png"]}
