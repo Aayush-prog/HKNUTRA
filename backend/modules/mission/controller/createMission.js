@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const path = require("path");
+
 const createMission = async (req, res) => {
   const MissionModel = mongoose.model("Mission");
   const { title, body, icon, color } = req.body;
+  console.log(req.body);
   const image = req.files?.image?.[0]
     ? path.basename(req.files.image[0].path)
     : null;

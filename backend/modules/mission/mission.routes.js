@@ -1,11 +1,12 @@
 const express = require("express");
 const auth = require("../../middleware/auth");
 const upload = require("../../middleware/upload");
-const createMission = require("./controllers/createMission");
-const getMission = require("./controllers/getMission");
-const getMissionById = require("./controllers/getMissionById");
-const delMission = require("./controllers/delMission");
-const editMission = require("./controllers/editMission");
+const createMission = require("./controller/createMission");
+const getMission = require("./controller/getMission");
+const getMissionById = require("./controller/getMissionById");
+const delMission = require("./controller/delMission");
+const editMission = require("./controller/editMission");
+
 const missionRouter = express.Router();
 missionRouter.get("/", getMission);
 missionRouter.get("/:missionId", getMissionById);
