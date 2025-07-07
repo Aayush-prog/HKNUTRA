@@ -21,7 +21,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop menu */}
-        <ul className="hidden md:flex gap-8 lg:gap-12 items-center">
+        <ul className="hidden lg:flex gap-8 lg:gap-12 items-center">
           {[
             { to: "/about", label: "About" },
             { to: "/membership", label: "Membership" },
@@ -46,14 +46,14 @@ export default function Navbar() {
         </ul>
         <button
           onClick={() => navigate("/login")}
-          className="hidden md:block ml-2 px-4 py-1 bg-primary text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="hidden lg:block ml-2 px-4 py-1 bg-primary text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
         >
           Join Now
         </button>
         {/* Mobile menu button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-2xl focus:outline-none focus:ring-2 focus:ring-green-400 rounded"
+          className="lg:hidden text-2xl focus:outline-none focus:ring-2 focus:ring-green-400 rounded"
           aria-label="Toggle menu"
         >
           {menuOpen ? <FaTimes /> : <FaBars />}
@@ -62,7 +62,7 @@ export default function Navbar() {
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-white shadow px-4 py-4">
+        <div className="lg:hidden bg-white shadow px-4 py-4">
           <ul className="flex flex-col gap-4 items-center">
             {[
               { to: "/about", label: "About" },

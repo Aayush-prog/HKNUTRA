@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 export default function HeroSection(props) {
-  const { image, title } = props;
+  const { image, title, id } = props;
   const api = import.meta.env.VITE_URL;
   return (
     <div className="relative w-full h-[75vh] bg-gray-200 overflow-hidden">

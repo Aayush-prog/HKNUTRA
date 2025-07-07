@@ -5,7 +5,7 @@ import { MdArrowOutward } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
 
-export default function UpcomingEvents() {
+export default function PastEvents() {
   const api = import.meta.env.VITE_URL;
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ export default function UpcomingEvents() {
   const fetchEvents = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${api}/event/upcoming`);
+      const response = await axios.get(`${api}/event/past`);
       if (response.status === 200) {
         setEvents(response.data.data);
       } else {
@@ -80,10 +80,10 @@ export default function UpcomingEvents() {
 
   return (
     <div className="p-4 md:p-8 lg:p-20">
-      <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
+      <h2 className="text-2xl font-bold mb-4">Past Events</h2>
       {error && <p className="text-red-500">{error}</p>}
+      {events.length == 0 && <div> No events to display</div>}
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 items-center mx-auto w-full lg:w-3/4 ">
-        {events.length == 0 && <div> No events to display</div>}
         {events.length > 0 &&
           displayedEvents.map((event) => (
             <div

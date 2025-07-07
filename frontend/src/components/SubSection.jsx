@@ -14,6 +14,7 @@ export default function SubSection({
   images,
   variant,
   alignment,
+  id,
 }) {
   const api = import.meta.env.VITE_URL;
 

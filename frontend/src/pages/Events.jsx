@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { React, useState, useEffect } from "react";
+import Loading from "../components/Loading";
 import HeroSection from "../components/HeroSection";
-import MissionSection from "../components/MissionSection";
 import SubSection from "../components/SubSection";
 import UpcomingEvents from "../components/UpcomingEvents";
+import PastEvents from "../components/PastEvents";
 import axios from "axios";
-import Loading from "../components/Loading";
-export default function Home() {
-  const [home, setHome] = useState();
+export default function Events() {
+  const [event, setEvent] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const api = import.meta.env.VITE_URL;
@@ -14,9 +14,9 @@ export default function Home() {
     const fetchPage = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${api}/pages/home`);
+        const res = await axios.get(`${api}/pages/event`);
         if (res.status === 200) {
-          setAbout(res.data.data);
+          setEvent(res.data.data);
         } else {
           setError(res.data.message);
         }
@@ -32,13 +32,10 @@ export default function Home() {
   if (loading) return <Loading />;
   return (
     <div>
-      <HeroSection title={"Welcome to HKNUTRA"} />
-      <SubSection
-        body={"lorem dkjas"}
-        images={["logoGreen.png", "logoGreen.png"]}
-      />
-      <MissionSection />
+      <HeroSection />
+      <SubSection />
       <UpcomingEvents />
+      <PastEvents />
     </div>
   );
 }
