@@ -80,7 +80,9 @@ export default function UpcomingEvents() {
 
   return (
     <div className="p-4 md:p-8 lg:p-20">
-      <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center mb-8">
+        Upcoming Events
+      </h2>
       {error && <p className="text-red-500">{error}</p>}
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 items-center mx-auto w-full lg:w-3/4 ">
         {events.length == 0 && <div> No events to display</div>}
@@ -96,7 +98,7 @@ export default function UpcomingEvents() {
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500"></div>
-              <div className="relative z-10 p-4 text-white flex flex-col justify-between h-full">
+              <div className="relative z-10 p-5 text-white flex flex-col justify-between h-full">
                 <div>
                   <p className="text-green-400 font-bold text-xl">
                     {event.location}
@@ -110,7 +112,7 @@ export default function UpcomingEvents() {
                   <p>{formatDateToWord(event.date)}</p>
                   <button
                     onClick={() => handleClick(event._id)}
-                    className="mt-2 p-2 inline-flex items-center hover:underline rounded bg-gray-800"
+                    className="mt-2 p-2 inline-flex items-center hover:underline rounded bg-green-500 hover:bg-green-600"
                   >
                     <p>Event Details</p>
                     <MdArrowOutward className="ml-1" />
@@ -133,9 +135,9 @@ export default function UpcomingEvents() {
         <div className="flex justify-center">
           <button
             onClick={handleExpand}
-            className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            className="mt-4 px-6 py-2 bg-primary text-white rounded hover:bg-green-600"
           >
-            See All
+            Show More
           </button>
         </div>
       )}
@@ -143,7 +145,7 @@ export default function UpcomingEvents() {
         <div className="flex justify-center">
           <button
             onClick={handleExpand}
-            className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-600"
           >
             Show Less
           </button>

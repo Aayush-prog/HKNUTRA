@@ -74,15 +74,17 @@ export default function PostDetail() {
         alt={post.title}
         className="w-full h-[75vh] object-cover mb-4"
       />
-      <h2 className="text-3xl font-bold text-center mb-4">{post.title}</h2>
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-primary font-secondary text-center my-8">
+        {post.title}
+      </h2>
 
-      <div className="flex flex-col md:flex-row justify-evenly lg:items-center mb-4 px-8">
+      <div className="flex flex-col md:flex-row justify-evenly lg:items-center mb-6 px-8">
         <div className="flex items-center gap-2 text-lg text-gray-700">
           <FaCalendar />
           <p>{formatDateToWord(post.createdAt)}</p>
         </div>
       </div>
-      <div className="prose lg:prose-xl mx-auto flex items-center justify-center px-8">
+      <div className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed text-center px-28 flex items-center">
         <p>{post.body}</p>
       </div>
     </div>

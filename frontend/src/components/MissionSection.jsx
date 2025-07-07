@@ -72,10 +72,10 @@ export default function MissionSection() {
 
   return (
     <div className="container mx-auto px-6 py-8">
-      <h2 className="text-3xl font-semibold text-green-500 text-center mb-4">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center">
         Our Mission
       </h2>
-      <p className="text-gray-700 text-center mb-8">
+      <p className="text-sm sm:text-base md:text-lg lg:text-xl font-primary text-center leading-relaxed my-8">
         Driving impact through innovation and a deep commitment to customer
         success.
       </p>
@@ -89,17 +89,20 @@ export default function MissionSection() {
           {mission.length > 0 &&
             mission.map((item, idx) => (
               <div
-                className="lg:flex text-center lg:text-left items-center gap-5 mb-6"
+                className="lg:flex text-center lg:text-left items-center gap-5 my-6"
                 key={idx}
               >
-                <IconRenderer iconName={item.icon} color={item.color} />
+                <IconRenderer
+                  iconName={item.icon}
+                  color={item.color}
+                />
                 <div>
                   <h3
                     className={`text-md md:text-xl font-semibold ${item.color} mb-1`}
                   >
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 text-sm">{item.body}</p>
+                  <p className="text-gray-600 text-base">{item.body}</p>
                 </div>
               </div>
             ))}

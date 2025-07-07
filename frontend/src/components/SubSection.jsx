@@ -81,7 +81,7 @@ export default function SubSection({
                       src={`${api}/images/${img}`}
                       loading="lazy"
                       alt={img}
-                      className="rounded-full w-full object-cover  shadow-lg"
+                      className="rounded-full w-full object-cover  shadow-lg "
                     />
                   </SwiperSlide>
                 );
@@ -102,7 +102,7 @@ export default function SubSection({
           {body && (
             <motion.p
               variants={childVariants}
-              className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed w-full sm:w-[100%] md:w-[90%] lg:w-[80%]"
+              className="text-sm sm:text-base md:text-lg lg:text-xl font-primary justify-center leading-relaxed w-full sm:w-[100%] md:w-[90%] lg:w-[80%]"
             >
               {body}
             </motion.p>

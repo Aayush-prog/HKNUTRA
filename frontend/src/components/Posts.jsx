@@ -95,7 +95,7 @@ export default function Posts() {
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-500"></div>
-              <div className="relative z-10 p-4 text-white flex flex-col justify-between h-full">
+              <div className="relative z-10 p-5 text-white flex flex-col justify-between h-full">
                 <div>
                   <p className="text-green-400 font-bold text-xl">
                     {post.location}
@@ -109,7 +109,7 @@ export default function Posts() {
                   <p>{formatDateToWord(post.createdAt)}</p>
                   <button
                     onClick={() => handleClick(post._id)}
-                    className="mt-2 p-2 inline-flex items-center hover:underline rounded bg-gray-800"
+                    className="mt-2 p-2 inline-flex items-center hover:underline rounded bg-green-500 hover:bg-green-600 "
                   >
                     <p>Post Details</p>
                     <MdArrowOutward className="ml-1" />
@@ -132,7 +132,7 @@ export default function Posts() {
         <div className="flex justify-center">
           <button
             onClick={handleExpand}
-            className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            className="mt-4 px-6 py-2 bg-primary text-white rounded hover:bg-green-6000"
           >
             See All
           </button>
@@ -142,7 +142,7 @@ export default function Posts() {
         <div className="flex justify-center">
           <button
             onClick={handleExpand}
-            className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            className="mt-4 px-6 py-2 bg-primary text-white rounded hover:bg-green-600"
           >
             Show Less
           </button>

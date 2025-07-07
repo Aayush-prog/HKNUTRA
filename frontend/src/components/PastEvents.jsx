@@ -80,9 +80,11 @@ export default function PastEvents() {
 
   return (
     <div className="p-4 md:p-8 lg:p-20">
-      <h2 className="text-2xl font-bold mb-4">Past Events</h2>
-      {error && <p className="text-red-500">{error}</p>}
-      {events.length == 0 && <div> No events to display</div>}
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center mb-8">
+        Past Events
+      </h2>
+      {error && <p className="text-red-500 text-center">{error}</p>}
+      {events.length == 0 && <div className="text-center"> No events to display</div>}
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 items-center mx-auto w-full lg:w-3/4 ">
         {events.length > 0 &&
           displayedEvents.map((event) => (
@@ -133,7 +135,7 @@ export default function PastEvents() {
         <div className="flex justify-center">
           <button
             onClick={handleExpand}
-            className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-600"
           >
             See All
           </button>
@@ -143,7 +145,7 @@ export default function PastEvents() {
         <div className="flex justify-center">
           <button
             onClick={handleExpand}
-            className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-600"
           >
             Show Less
           </button>

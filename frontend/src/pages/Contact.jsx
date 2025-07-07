@@ -41,9 +41,9 @@ export default function Contact() {
           image={contact.heroSection.image}
         />
 
-        <div className="flex flex-col md:flex-row justify-center gap-5 py-10 md:py-20 items-center px-4">
+        <div className="flex flex-col md:flex-row justify-center gap-10 py-10 md:py-20 items-center px-4">
           <div className="flex flex-col gap-5 text-center md:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary">
               We'd love to hear from you
             </h2>
             <p className="text-gray-700">
@@ -69,7 +69,7 @@ export default function Contact() {
             <div className="w-full md:w-1/3">
               <label
                 htmlFor="name"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-700 text-base font-bold mb-2"
               >
                 Your Name:
               </label>
@@ -85,7 +85,7 @@ export default function Contact() {
             <div className="w-full md:w-1/3">
               <label
                 htmlFor="email"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-700 text-base font-bold mb-2"
               >
                 Email Address:
               </label>
@@ -101,7 +101,7 @@ export default function Contact() {
             <div className="w-full md:w-1/3">
               <label
                 htmlFor="phone"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-700 text-base font-bold mb-2"
               >
                 Phone Number (optional):
               </label>
@@ -117,7 +117,7 @@ export default function Contact() {
           <div className="mb-5">
             <label
               htmlFor="message"
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-700 text-base font-bold mb-2"
             >
               Message:
             </label>
@@ -126,7 +126,7 @@ export default function Contact() {
               name="message"
               placeholder="Enter your message"
               required
-              className="appearance-none border-b w-full  px-3 text-gray-700 leading-tight focus:outline-none resize-none"
+              className="appearance-none border-b w-full px-3 text-gray-700 leading-tight focus:outline-none resize-none"
             />
           </div>
           <button className="flex items-center justify-center rounded px-4 py-2 mt-5 bg-primary text-white gap-3">
@@ -134,16 +134,16 @@ export default function Contact() {
             <FaArrowRight />
           </button>
         </form>
-        <div className="flex items-center justify-center">
-          <div className="w-full md:w-3/4 flex flex-col md:flex-row gap-5 md:gap-3 items-center justify-center px-4 py-5 ">
-            <div className="w-full ">
+        <div className="flex items-center justify-center bg-amber-300 py-4">
+          <div className="w-full md:w-3/4 flex flex-col md:flex-row gap-5 md:gap-3 items-center justify-center px-4 py-5">
+            <div className="w-full">
               <h2 className="text-xl font-semibold">
-                We are always happy to assist you
+                We are always happy to assist you!
               </h2>
             </div>
             <div className="w-full ">
               <p className="font-semibold">Email Address</p>
-              <div className="border-b-2 w-1/4 mx-auto md:mx-0 hidden md:block"></div>
+              <div className="border-b-2 w-1/4 mx-auto md:mx-0 hidden md:block mb-2"></div>
               <a
                 href={`mailto:jpt@example.com`}
                 className="text-blue-500 hover:underline"
@@ -153,7 +153,7 @@ export default function Contact() {
             </div>
             <div className="w-full">
               <p className="font-semibold">Number</p>
-              <div className="border-b-2 w-1/4 mx-auto md:mx-0 hidden md:block"></div>
+              <div className="border-b-2 w-1/4 mx-auto md:mx-0 hidden md:block mb-2"></div>
               <p>jpt@example.com</p>
             </div>
           </div>
