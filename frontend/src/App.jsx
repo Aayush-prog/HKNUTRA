@@ -9,6 +9,10 @@ import Layout from "./components/Layout";
 import About from "./pages/About";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
+import EventDetail from "./pages/EventDetail";
+import Posts from "./components/Posts";
+import PostDetail from "./pages/PostDetail";
+import Community from "./pages/Community";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -17,6 +21,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<EventDetail />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/community/:id" element={<PostDetail />} />
         <Route path="/contact" element={<Contact />} />
       </Route>
     )

@@ -3,8 +3,9 @@ import Loading from "../components/Loading";
 import HeroSection from "../components/HeroSection";
 import SubSection from "../components/SubSection";
 import axios from "axios";
-export default function About() {
-  const [about, setAbout] = useState();
+import Posts from "../components/Posts";
+export default function Community() {
+  const [community, setCommunity] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const api = import.meta.env.VITE_URL;
@@ -12,9 +13,9 @@ export default function About() {
     const fetchPage = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${api}/pages/about`);
+        const res = await axios.get(`${api}/pages/community`);
         if (res.status === 200) {
-          setAbout(res.data.data);
+          setCommunity(res.data.data);
         } else {
           setError(res.data.message);
         }
@@ -29,30 +30,22 @@ export default function About() {
   }, []);
   if (loading) return <Loading />;
   return (
-    about && (
+    community && (
       <div>
         <HeroSection
-          title={about.heroSection.title}
-          image={about.heroSection.image}
+          title={community.heroSection.title}
+          image={community.heroSection.image}
         />
         <SubSection
-          title={about.subSection1.title}
-          body={about.subSection1.body}
-          body2={about.subSection1.body2}
-          images={about.subSection1.images}
-          image={about.subSection1.image}
-          variant={about.subSection1.variant}
-          alignment={about.subSection1.alignment}
+          title={community.subSection1.title}
+          body={community.subSection1.body}
+          body2={community.subSection1.body2}
+          images={community.subSection1.images}
+          image={community.subSection1.image}
+          variant={community.subSection1.variant}
+          alignment={community.subSection1.alignment}
         />
-        <SubSection
-          title={about.subSection2.title}
-          body={about.subSection2.body}
-          body2={about.subSection2.body2}
-          images={about.subSection2.images}
-          image={about.subSection2.image}
-          variant={about.subSection2.variant}
-          alignment={about.subSection2.alignment}
-        />
+        <Posts />
       </div>
     )
   );

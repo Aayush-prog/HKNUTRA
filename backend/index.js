@@ -14,6 +14,7 @@ const eventRouter = require("./modules/event/event.routes.js");
 const personRouter = require("./modules/person/person.routes.js");
 const contactRouter = require("./modules/contact/contact.routes.js");
 const missionRouter = require("./modules/mission/mission.routes.js");
+const pageRouter = require("./modules/pages/pages.routes.js");
 // Models
 require("./models/userModel.js");
 require("./models/heroModel.js");
@@ -49,6 +50,7 @@ app.use("/mission", missionRouter);
 app.use("/subSection", subSectionRouter);
 app.use("/person", personRouter);
 app.use("/contact", contactRouter);
+app.use("/pages", pageRouter);
 // Start the server
 app.listen(8000, () => {
   console.log("Server started on port 8000");

@@ -14,9 +14,9 @@ export default function Home() {
     const fetchPage = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`${api}/pages/home`);
+        const res = await axios.get(`${api}/pages/landing`);
         if (res.status === 200) {
-          setAbout(res.data.data);
+          setHome(res.data.data);
         } else {
           setError(res.data.message);
         }
@@ -31,14 +31,24 @@ export default function Home() {
   }, []);
   if (loading) return <Loading />;
   return (
-    <div>
-      <HeroSection title={"Welcome to HKNUTRA"} />
-      <SubSection
-        body={"lorem dkjas"}
-        images={["logoGreen.png", "logoGreen.png"]}
-      />
-      <MissionSection />
-      <UpcomingEvents />
-    </div>
+    home && (
+      <div>
+        <HeroSection
+          title={home.heroSection.title}
+          image={home.heroSection.image}
+        />
+        <SubSection
+          title={home.subSection1.title}
+          body={home.subSection1.body}
+          body2={home.subSection1.body2}
+          images={home.subSection1.images}
+          image={home.subSection1.image}
+          variant={home.subSection1.variant}
+          alignment={home.subSection1.alignment}
+        />
+        <MissionSection />
+        <UpcomingEvents />
+      </div>
+    )
   );
 }

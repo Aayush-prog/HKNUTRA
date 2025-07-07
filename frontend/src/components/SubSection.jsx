@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -48,7 +48,7 @@ export default function SubSection({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className={`flex flex-col sm:flex-row items-center justify-center min-h-[30vh] sm:min-h-[40vh] md:min-h-[50vh] py-8 sm:py-12 md:py-16 text-center px-4 space-y-3 sm:space-y-4 md:space-y-5 ${
+        className={`flex flex-col sm:flex-row items-center justify-center  py-8 sm:py-12 md:py-16 text-center px-4 space-y-3 sm:space-y-4 md:space-y-5 ${
           variant === "green" ? "bg-green-300 text-white" : "text-black"
         }`}
       >
@@ -64,7 +64,7 @@ export default function SubSection({
           )}
           {images && (
             <Swiper
-              modules={[Pagination]}
+              modules={[Pagination, Autoplay]}
               pagination={{ clickable: true }}
               autoplay={{
                 delay: 500,
@@ -81,7 +81,7 @@ export default function SubSection({
                       src={`${api}/images/${img}`}
                       loading="lazy"
                       alt={img}
-                      className="rounded-full w-full object-cover shadow-lg"
+                      className="rounded-full w-full object-cover  shadow-lg"
                     />
                   </SwiperSlide>
                 );
@@ -118,7 +118,7 @@ export default function SubSection({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className={`flex flex-col items-center justify-center min-h-[30vh] sm:min-h-[40vh] md:min-h-[50vh] py-8 sm:py-12 md:py-16 text-center px-4 space-y-3 sm:space-y-4 md:space-y-5 ${
+        className={`flex flex-col items-center justify-center py-8 sm:py-12 md:py-16 text-center px-4 space-y-3 sm:space-y-4 md:space-y-5 ${
           variant === "green" ? "bg-green-300 text-white" : "text-black"
         }`}
       >

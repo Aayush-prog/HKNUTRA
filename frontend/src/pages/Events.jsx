@@ -31,11 +31,24 @@ export default function Events() {
   }, []);
   if (loading) return <Loading />;
   return (
-    <div>
-      <HeroSection />
-      <SubSection />
-      <UpcomingEvents />
-      <PastEvents />
-    </div>
+    event && (
+      <div>
+        <HeroSection
+          title={event.heroSection.title}
+          image={event.heroSection.image}
+        />
+        <SubSection
+          title={event.subSection1.title}
+          body={event.subSection1.body}
+          body2={event.subSection1.body2}
+          images={event.subSection1.images}
+          image={event.subSection1.image}
+          variant={event.subSection1.variant}
+          alignment={event.subSection1.alignment}
+        />
+        <UpcomingEvents />
+        <PastEvents />
+      </div>
+    )
   );
 }
