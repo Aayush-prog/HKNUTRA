@@ -15,6 +15,7 @@ const personRouter = require("./modules/person/person.routes.js");
 const contactRouter = require("./modules/contact/contact.routes.js");
 const missionRouter = require("./modules/mission/mission.routes.js");
 const pageRouter = require("./modules/pages/pages.routes.js");
+const membershipReasonRouter = require("./modules/membershipReason/membershipReason.routes.js");
 // Models
 require("./models/userModel.js");
 require("./models/heroModel.js");
@@ -25,6 +26,7 @@ require("./models/personModel.js");
 require("./models/postModel.js");
 require("./models/contactModel.js");
 require("./models/missionModel.js");
+require("./models/membershipReasonModel.js");
 // Initialize Express
 const app = express();
 
@@ -47,6 +49,7 @@ app.use("/post", postRouter);
 app.use("/event", eventRouter);
 app.use("/hero", heroRouter);
 app.use("/mission", missionRouter);
+app.use("/membershipReason", membershipReasonRouter);
 app.use("/subSection", subSectionRouter);
 app.use("/person", personRouter);
 app.use("/contact", contactRouter);

@@ -4,7 +4,9 @@ const getMembership = async (req, res) => {
   try {
     const membership = await PageModel.findOne({
       type: "Membership",
-    }).populate("heroSection");
+    })
+      .populate("heroSection")
+      .populate("subSection1");
     res.status(200).json({ status: "success", data: membership });
   } catch (e) {
     res.status(400).json({ msg: e.msg || "error" });

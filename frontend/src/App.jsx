@@ -13,6 +13,7 @@ import EventDetail from "./pages/EventDetail";
 import Posts from "./components/Posts";
 import PostDetail from "./pages/PostDetail";
 import Community from "./pages/Community";
+import Membership from "./pages/Membership";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -20,6 +21,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/membership" element={<Membership />} />
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventDetail />} />
         <Route path="/community" element={<Community />} />
