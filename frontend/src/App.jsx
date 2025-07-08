@@ -14,20 +14,37 @@ import Posts from "./components/Posts";
 import PostDetail from "./pages/PostDetail";
 import Community from "./pages/Community";
 import Membership from "./pages/Membership";
+import PrivateRoute from "../PrivateRouter";
+import AdminLayout from "../admin/components/AdminLayout";
+import Login from "./pages/Login";
+import AdminHome from "../admin/pages/Home";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<Layout />}>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/membership" element={<Membership />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/events/:id" element={<EventDetail />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/community/:id" element={<PostDetail />} />
-        <Route path="/contact" element={<Contact />} />
-      </Route>
+      <>
+        <Route element={<Layout />}>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/membership" element={<Membership />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/events/:id" element={<EventDetail />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/community/:id" element={<PostDetail />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <AdminLayout />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<AdminHome />} />
+        </Route>
+      </>
     )
   );
   return <RouterProvider router={router} />;
