@@ -17,6 +17,17 @@ export default function PastEvents() {
   const [totalPages, setTotalPages] = useState(1);
   const eventsPerPage = 6;
 
+  const [showAddEventForm, setShowAddEventForm] = useState(false);
+  const [newEvent, setNewEvent] = useState({
+    title: "",
+    body: "",
+    image: null,
+    date: "",
+    time: "",
+    location: "",
+  });
+  const [imagePreview, setImagePreview] = useState(null);
+
   const fetchEvents = async () => {
     try {
       setLoading(true);
@@ -67,25 +78,99 @@ export default function PastEvents() {
     return date.toLocaleDateString(undefined, options);
   }
 
-  if (loading) return <Loading />;
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewEvent((prevEvent) => ({
+      ...prevEvent,
+      [name]: value,
+    }));
+  };
 
-  let displayedEvents;
-  if (showAll) {
-    const startIndex = (currentPage - 1) * eventsPerPage;
-    const endIndex = startIndex + eventsPerPage;
-    displayedEvents = events.slice(startIndex, endIndex);
-  } else {
-    displayedEvents = events.slice(0, 2);
-  }
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setNewEvent((prevEvent) => ({
+      ...prevEvent,
+      image: file,
+    }));
 
-  return (
-    <div className="p-4 md:p-8 lg:p-20">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center mb-8">
-        Past Events
-      </h2>
-      {error && <p className="text-red-500 text-center">{error}</p>}
-      {events.length == 0 && <div className="text-center"> No events to display</div>}
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImagePreview(null);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+      formData.append("title", newEvent.title);
+      formData.append("body", newEvent.body);
+      formData.append("image", newEvent.image);
+      formData.append("date", newEvent.date);
+      formData.append("time", newEvent.time);
+      formData.append("location", newEvent.location);
+      formData.append("complete", true);
+      const response = await axios.post(`${api}/event/create`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.status === 201) {
+        fetchEvents();
+        setShowAddEventForm(false);
+        setNewEvent({
+          title: "",
+          body: "",
+          image: null,
+          date: "",
+          time: "",
+          location: "",
+        });
+        setImagePreview(null);
+      } else {
+        setError(response.data.message);
+      }
+    } catch (err) {
+      setError("Failed to create event.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const toggleAddEventForm = () => {
+    setShowAddEventForm(!showAddEventForm);
+    setNewEvent({
+      title: "",
+      body: "",
+      image: null,
+      date: "",
+      time: "",
+      location: "",
+    });
+    setImagePreview(null);
+    setError(null);
+  };
+
+  const EventDisplay = () => {
+    let displayedEvents;
+    if (showAll) {
+      const startIndex = (currentPage - 1) * eventsPerPage;
+      const endIndex = startIndex + eventsPerPage;
+      displayedEvents = events.slice(startIndex, endIndex);
+    } else {
+      displayedEvents = events.slice(0, 2);
+    }
+    return (
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 items-center mx-auto w-full lg:w-3/4 ">
+        {events.length == 0 && <div> No events to display</div>}
         {events.length > 0 &&
           displayedEvents.map((event) => (
             <div
@@ -122,7 +207,13 @@ export default function PastEvents() {
             </div>
           ))}
       </div>
-      {showAll && events.length > eventsPerPage && (
+    );
+  };
+
+  const PaginationControls = () => {
+    return (
+      showAll &&
+      events.length > eventsPerPage && (
         <div className="flex justify-center mt-4">
           <Pagination
             currentPage={currentPage}
@@ -130,26 +221,189 @@ export default function PastEvents() {
             onPageChange={handlePageChange}
           />
         </div>
-      )}
-      {!showAll && events.length > 2 && (
-        <div className="flex justify-center">
-          <button
-            onClick={handleExpand}
-            className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-600"
+      )
+    );
+  };
+
+  const ShowMoreLessButtons = () => {
+    return (
+      <>
+        {!showAll && events.length > 2 && (
+          <div className="flex justify-center">
+            <button
+              onClick={handleExpand}
+              className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-600"
+            >
+              See All
+            </button>
+          </div>
+        )}
+        {showAll && events.length > 2 && (
+          <div className="flex justify-center">
+            <button
+              onClick={handleExpand}
+              className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-600"
+            >
+              Show Less
+            </button>
+          </div>
+        )}
+      </>
+    );
+  };
+
+  if (loading) return <Loading />;
+
+  return (
+    <div className="p-4 md:p-8 lg:p-20">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center mb-8">
+        Past Events
+      </h2>
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={toggleAddEventForm}
+          className="px-6 py-2 bg-primary text-white rounded hover:bg-green-600"
+        >
+          {showAddEventForm ? "Hide Form" : "Add Event"}
+        </button>
+      </div>
+      {error && <p className="text-red-500 text-center">{error}</p>}
+
+      {showAddEventForm ? (
+        <div className="bg-white rounded-lg p-8 w-full max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold mb-4">Add New Event</h2>
+          <form
+            onSubmit={handleSubmit}
+            className="md:flex md:flex-wrap md:justify-between"
           >
-            See All
-          </button>
+            <div className="mb-4 md:w-1/2 md:pr-2">
+              <label
+                htmlFor="title"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Title:
+              </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={newEvent.title}
+                onChange={handleInputChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                required
+              />
+            </div>
+            <div className="mb-4 md:w-1/2 md:pl-2">
+              <label
+                htmlFor="location"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Location:
+              </label>
+              <input
+                type="text"
+                id="location"
+                name="location"
+                value={newEvent.location}
+                onChange={handleInputChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                required
+              />
+            </div>
+            <div className="mb-4 md:w-1/2 md:pr-2">
+              <label
+                htmlFor="date"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Date:
+              </label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                value={newEvent.date}
+                onChange={handleInputChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                required
+              />
+            </div>
+            <div className="mb-4 md:w-1/2 md:pl-2">
+              <label
+                htmlFor="time"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Time:
+              </label>
+              <input
+                type="time"
+                id="time"
+                name="time"
+                value={newEvent.time}
+                onChange={handleInputChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <div className="mb-4 md:w-full">
+              <label
+                htmlFor="body"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Body:
+              </label>
+              <textarea
+                id="body"
+                name="body"
+                value={newEvent.body}
+                onChange={handleInputChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                rows="3"
+              ></textarea>
+            </div>
+            <div className="mb-4 md:w-full">
+              <label
+                htmlFor="image"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Image:
+              </label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                onChange={handleImageChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {imagePreview && (
+                <img
+                  src={imagePreview}
+                  alt="Preview"
+                  className="mt-2 max-h-40"
+                />
+              )}
+            </div>
+            <div className="flex justify-end md:w-full">
+              <button
+                type="button"
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+                onClick={toggleAddEventForm}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="bg-primary hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Create Event
+              </button>
+            </div>
+          </form>
         </div>
-      )}
-      {showAll && events.length > 2 && (
-        <div className="flex justify-center">
-          <button
-            onClick={handleExpand}
-            className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-600"
-          >
-            Show Less
-          </button>
-        </div>
+      ) : (
+        <>
+          <EventDisplay />
+          <PaginationControls />
+          <ShowMoreLessButtons />
+        </>
       )}
     </div>
   );
