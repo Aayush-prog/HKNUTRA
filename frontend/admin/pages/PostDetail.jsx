@@ -4,6 +4,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaCalendar } from "react-icons/fa";
 import { MdEdit, MdDelete } from "react-icons/md";
+import { AuthContext } from "../../AuthContext";
 
 export default function PostDetail() {
   const { id } = useParams();
@@ -11,6 +12,7 @@ export default function PostDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const api = import.meta.env.VITE_URL;
+  const { authToken } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [editedPost, setEditedPost] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -93,9 +95,10 @@ export default function PostDetail() {
         formData.append("image", editedPost.image);
       }
 
-      const response = await axios.put(`${api}/post/${id}`, formData, {
+      const response = await axios.patch(`${api}/post/edit/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${authToken}`,
         },
       });
 
@@ -123,7 +126,11 @@ export default function PostDetail() {
     if (window.confirm("Are you sure you want to delete this post?")) {
       try {
         setLoading(true);
-        const response = await axios.delete(`${api}/post/${id}`);
+        const response = await axios.delete(`${api}/post/del/${id}`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
         if (response.status === 200) {
           alert("Post deleted successfully.");
           navigate("/admin/posts");

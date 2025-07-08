@@ -182,6 +182,7 @@ export default function MissionSection() {
       });
 
       if (res.status === 200) {
+        alert("success");
         setEditingIndex(null);
         fetchMission(); // Refresh mission data
         setImagePreview(null);
@@ -195,12 +196,15 @@ export default function MissionSection() {
 
   const handleDelete = async (_id) => {
     try {
-      await axios.delete(`${api}/mission/del/${_id}`, {
+      const res = await axios.delete(`${api}/mission/del/${_id}`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
       });
-      setMission((prev) => prev.filter((o) => o._id !== _id));
+      if (res.status == 200) {
+        alert("success");
+        setMission((prev) => prev.filter((o) => o._id !== _id));
+      }
     } catch (error) {
       console.error("Error deleting mission:", error);
     }
@@ -225,9 +229,10 @@ export default function MissionSection() {
       });
 
       if (res.status === 201) {
+        alert("success");
         setMission((prev) => [...prev, res.data.data]);
         setIsAdding(false);
-        fetchMission(); // Refresh mission data
+        fetchMission();
         setImagePreview(null);
       }
     } catch (error) {

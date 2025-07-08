@@ -5,6 +5,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FaCalendar, FaClock } from "react-icons/fa";
 import { FaLocationPin } from "react-icons/fa6";
 import { MdEdit, MdDelete } from "react-icons/md";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthContext";
 
 export default function EventDetail() {
   const { id } = useParams();
@@ -16,7 +18,7 @@ export default function EventDetail() {
   const [editedEvent, setEditedEvent] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const navigate = useNavigate();
-
+  const { authToken } = useContext(AuthContext);
   useEffect(() => {
     const fetchPage = async () => {
       try {
@@ -97,13 +99,15 @@ export default function EventDetail() {
       formData.append("time", editedEvent.time);
       formData.append("location", editedEvent.location);
 
-      const response = await axios.put(`${api}/event/${id}`, formData, {
+      const response = await axios.patch(`${api}/event/edit/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${authToken}`,
         },
       });
 
       if (response.status === 200) {
+        alert("success");
         setEvent({ ...editedEvent });
         setImagePreview(
           editedEvent.image && typeof editedEvent.image !== "string"
@@ -127,7 +131,11 @@ export default function EventDetail() {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
         setLoading(true);
-        const response = await axios.delete(`${api}/event/${id}`);
+        const response = await axios.delete(`${api}/event/del/${id}`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
         if (response.status === 200) {
           alert("Event deleted successfully.");
           navigate("/admin/events");

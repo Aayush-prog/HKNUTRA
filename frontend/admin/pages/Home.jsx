@@ -36,6 +36,7 @@ export default function Home() {
         <HeroSection
           title={home.heroSection.title}
           image={home.heroSection.image}
+          id={home.heroSection._id}
         />
         <SubSection
           initialTitle={home.subSection1.title}

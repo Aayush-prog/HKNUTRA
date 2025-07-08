@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import { MdArrowOutward } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
+import { AuthContext } from "../../AuthContext";
 
 export default function PastEvents() {
   const api = import.meta.env.VITE_URL;
@@ -12,7 +13,7 @@ export default function PastEvents() {
   const [error, setError] = useState(null);
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
-
+  const { authToken } = useContext(AuthContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const eventsPerPage = 6;
@@ -120,10 +121,12 @@ export default function PastEvents() {
       const response = await axios.post(`${api}/event/create`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${authToken}`,
         },
       });
 
       if (response.status === 201) {
+        alert("success");
         fetchEvents();
         setShowAddEventForm(false);
         setNewEvent({

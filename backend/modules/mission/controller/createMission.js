@@ -16,7 +16,7 @@ const createMission = async (req, res) => {
       icon,
       color,
     });
-    res.status(200).json({
+    res.status(201).json({
       status: "success",
       data: newMission,
     });
