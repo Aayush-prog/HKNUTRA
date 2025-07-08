@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(null);
   const [role, setRole] = useState(null);
   const [id, setId] = useState(null);
+  const [loading, setLoading] = useState(true);
   // Load token from localStorage on app load
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -16,6 +17,7 @@ export const AuthProvider = ({ children }) => {
     if (token) setAuthToken(token);
     if (userRole) setRole(userRole);
     if (id) setId(id);
+    setLoading(false);
   }, []);
 
   // Function to save token after login
@@ -39,7 +41,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ authToken, role, id, login, logout }}>
+    <AuthContext.Provider
+      value={{ authToken, role, id, login, logout, loading }}
+    >
       {children}
     </AuthContext.Provider>
   );
