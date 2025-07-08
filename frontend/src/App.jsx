@@ -18,6 +18,7 @@ import PrivateRoute from "../PrivateRouter";
 import AdminLayout from "../admin/components/AdminLayout";
 import Login from "./pages/Login";
 import AdminHome from "../admin/pages/Home";
+import AdminAbout from "../admin/pages/About";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -36,13 +37,10 @@ function App() {
         </Route>
         <Route
           path="/admin"
-          element={
-            <PrivateRoute>
-              <AdminLayout />
-            </PrivateRoute>
-          }
+          element={<PrivateRoute element={<AdminLayout />} />}
         >
           <Route index element={<AdminHome />} />
+          <Route path="about" element={<AdminAbout />} />
         </Route>
       </>
     )

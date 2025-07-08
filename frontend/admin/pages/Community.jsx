@@ -37,13 +37,14 @@ export default function Community() {
           image={community.heroSection.image}
         />
         <SubSection
-          title={community.subSection1.title}
-          body={community.subSection1.body}
-          body2={community.subSection1.body2}
-          images={community.subSection1.images}
-          image={community.subSection1.image}
-          variant={community.subSection1.variant}
-          alignment={community.subSection1.alignment}
+          initialTitle={community.subSection1.title}
+          initialBody={community.subSection1.body}
+          initialBody2={community.subSection1.body2}
+          initialImages={community.subSection1.images}
+          initialImage={community.subSection1.image}
+          initialVariant={community.subSection1.variant}
+          initialAlignment={community.subSection1.alignment}
+          id={community.subSection1._id}
         />
         <Posts />
       </div>

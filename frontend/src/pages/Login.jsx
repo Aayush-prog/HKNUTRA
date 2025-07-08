@@ -36,7 +36,7 @@ function Login() {
       const response = await axios.post(`${api}/login`, { email, password });
       if (response.status === 200) {
         login(response.data.token, response.data.role, response.data.id);
-        navigate("/admin/");
+        navigate("/admin");
       }
     } catch (err) {
       const msg = err.response?.data?.msg || "Login failed. Please try again.";

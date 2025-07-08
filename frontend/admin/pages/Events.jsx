@@ -38,13 +38,14 @@ export default function Events() {
           image={event.heroSection.image}
         />
         <SubSection
-          title={event.subSection1.title}
-          body={event.subSection1.body}
-          body2={event.subSection1.body2}
-          images={event.subSection1.images}
-          image={event.subSection1.image}
-          variant={event.subSection1.variant}
-          alignment={event.subSection1.alignment}
+          initialTitle={event.subSection1.title}
+          initialBody={event.subSection1.body}
+          initialBody2={event.subSection1.body2}
+          initialImages={event.subSection1.images}
+          initialImage={event.subSection1.image}
+          initialVariant={event.subSection1.variant}
+          initialAlignment={event.subSection1.alignment}
+          id={event.subSection1._id}
         />
         <UpcomingEvents />
         <PastEvents />

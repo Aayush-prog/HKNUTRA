@@ -38,13 +38,14 @@ export default function Home() {
           image={home.heroSection.image}
         />
         <SubSection
-          title={home.subSection1.title}
-          body={home.subSection1.body}
-          body2={home.subSection1.body2}
-          images={home.subSection1.images}
-          image={home.subSection1.image}
-          variant={home.subSection1.variant}
-          alignment={home.subSection1.alignment}
+          initialTitle={home.subSection1.title}
+          initialBody={home.subSection1.body}
+          initialBody2={home.subSection1.body2}
+          initialImages={home.subSection1.images}
+          initialImage={home.subSection1.image}
+          initialVariant={home.subSection1.variant}
+          initialAlignment={home.subSection1.alignment}
+          id={home.subSection1._id}
         />
         <MissionSection />
         <UpcomingEvents />

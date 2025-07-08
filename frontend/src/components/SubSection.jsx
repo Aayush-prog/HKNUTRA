@@ -90,7 +90,7 @@ export default function SubSection({
           )}
         </div>
 
-        <div className="w-full sm:w-1/2 flex flex-col items-start">
+        <div className="w-full sm:w-1/2 flex flex-col items-center">
           {title && (
             <motion.h2
               variants={childVariants}

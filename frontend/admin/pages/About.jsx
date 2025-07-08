@@ -34,24 +34,27 @@ export default function About() {
         <HeroSection
           title={about.heroSection.title}
           image={about.heroSection.image}
+          id={about.heroSection._id}
         />
         <SubSection
-          title={about.subSection1.title}
-          body={about.subSection1.body}
-          body2={about.subSection1.body2}
-          images={about.subSection1.images}
-          image={about.subSection1.image}
-          variant={about.subSection1.variant}
-          alignment={about.subSection1.alignment}
+          initialTitle={about.subSection1.title}
+          initialBody={about.subSection1.body}
+          initialBody2={about.subSection1.body2}
+          initialImages={about.subSection1.images}
+          initialImage={about.subSection1.image}
+          initialVariant={about.subSection1.variant}
+          initialAlignment={about.subSection1.alignment}
+          id={about.subSection1._id}
         />
         <SubSection
-          title={about.subSection2.title}
-          body={about.subSection2.body}
-          body2={about.subSection2.body2}
-          images={about.subSection2.images}
-          image={about.subSection2.image}
-          variant={about.subSection2.variant}
-          alignment={about.subSection2.alignment}
+          initialTitle={about.subSection2.title}
+          initialBody={about.subSection2.body}
+          initialBody2={about.subSection2.body2}
+          initialImages={about.subSection2.images}
+          initialImage={about.subSection2.image}
+          initialVariant={about.subSection2.variant}
+          initialAlignment={about.subSection2.alignment}
+          id={about.subSection2._id}
         />
       </div>
     )

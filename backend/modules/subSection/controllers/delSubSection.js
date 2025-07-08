@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const delSubSection = async (req, res) => {
   const SubSectionModel = mongoose.model("SubSection");
-  const {} = req.body;
   const { subSectionId } = req.params;
   try {
     const subSection = await SubSectionModel.findById(subSectionId);
