@@ -84,7 +84,9 @@ export default function PastEvents() {
         Past Events
       </h2>
       {error && <p className="text-red-500 text-center">{error}</p>}
-      {events.length == 0 && <div className="text-center"> No events to display</div>}
+      {events.length == 0 && (
+        <div className="text-center"> No events to display</div>
+      )}
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 items-center mx-auto w-full lg:w-3/4 ">
         {events.length > 0 &&
           displayedEvents.map((event) => (

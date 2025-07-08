@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import Loading from "../components/Loading";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
@@ -133,7 +133,7 @@ export default function PostDetail() {
         });
         if (response.status === 200) {
           alert("Post deleted successfully.");
-          navigate("/admin/posts");
+          navigate("/admin/community");
         } else {
           setError(response.data.message);
         }
