@@ -67,7 +67,7 @@ export default function SubSection({
               modules={[Pagination, Autoplay]}
               pagination={{ clickable: true }}
               autoplay={{
-                delay: 500,
+                delay: 5000,
                 disableOnInteraction: true,
               }}
               spaceBetween={30}
@@ -81,7 +81,7 @@ export default function SubSection({
                       src={`${api}/images/${img}`}
                       loading="lazy"
                       alt={img}
-                      className="rounded-full w-full object-cover  shadow-lg "
+                      className=" w-full object-cover  shadow-lg "
                     />
                   </SwiperSlide>
                 );
@@ -133,10 +133,10 @@ export default function SubSection({
         )}
         {images && (
           <Swiper
-            modules={[Pagination]}
+            modules={[Pagination, Autoplay]}
             pagination={{ clickable: true }}
             autoplay={{
-              delay: 500,
+              delay: 3000,
               disableOnInteraction: true,
             }}
             spaceBetween={30}
@@ -150,7 +150,7 @@ export default function SubSection({
                     src={`${api}/images/${img}`}
                     loading="lazy"
                     alt={img}
-                    className="rounded-full  w-full object-cover shadow-lg"
+                    className="h-[40vh] md:h-[70vh] w-full object-fit shadow-lg"
                   />
                 </SwiperSlide>
               );

@@ -370,7 +370,7 @@ export default function SubSection({
                         src={`${api}/images/${img}`}
                         loading="lazy"
                         alt={img}
-                        className="rounded-full w-full object-cover  shadow-lg "
+                        className="h-[40vh] md:h-[70vh] object-fit  shadow-lg "
                       />
                     </SwiperSlide>
                   );

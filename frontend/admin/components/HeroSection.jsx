@@ -121,7 +121,7 @@ export default function HeroSection(props) {
   );
 
   return (
-    <div className="relative w-full h-[75vh] bg-gray-200 overflow-hidden">
+    <div className="relative w-full h-[87vh] bg-gray-200 overflow-hidden">
       {isEditing ? renderEditMode() : renderDisplayMode()}
 
       <button
