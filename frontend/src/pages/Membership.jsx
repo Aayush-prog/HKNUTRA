@@ -41,6 +41,11 @@ export default function Membership() {
           image={membership.heroSection.image}
         />
         <MembershipReason />
+
+        <stripe-buy-button
+          buy-button-id="buy_btn_1RtPIxCYZtStphAipMQbdcLs"
+          publishable-key="pk_test_51RtN7kCYZtStphAiNyhyKONwYKK4g6V6RXbAn7Lgh13riGpUNetexKEruRoJ7xjk7OQyWgLkSFqAmQSadgS8iUyb00NAkaus1a"
+        ></stripe-buy-button>
       </div>
     )
   );

@@ -8,7 +8,10 @@ const eventSchema = new mongoose.Schema(
     time: { type: String },
     location: { type: String },
     images: [{ type: String }],
-    type: { type: String, enum: ["All", "Kids", "Women"], default: "All" },
+    type: {
+      type: String,
+      enum: ["Kids", "Weekly", "Monthly"],
+    },
     complete: { type: Boolean, default: false },
   },
   { timestamps: true }

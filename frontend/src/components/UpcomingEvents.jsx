@@ -17,6 +17,10 @@ export default function UpcomingEvents() {
   const [totalPages, setTotalPages] = useState(1);
   const eventsPerPage = 6;
 
+  // New state variables for filtering and searching
+  const [filterType, setFilterType] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
+
   const fetchEvents = async () => {
     try {
       setLoading(true);
@@ -37,12 +41,16 @@ export default function UpcomingEvents() {
     fetchEvents();
   }, []);
 
+  // Recalculate total pages and reset current page whenever events or filters change
   useEffect(() => {
-    if (showAll) {
-      setTotalPages(Math.ceil(events.length / eventsPerPage));
-      setCurrentPage(1);
-    }
-  }, [events, showAll]);
+    const currentFilteredEvents = applyFiltersAndSearch(
+      events,
+      filterType,
+      searchTerm
+    );
+    setTotalPages(Math.ceil(currentFilteredEvents.length / eventsPerPage));
+    setCurrentPage(1); // Reset to first page when filters change
+  }, [events, showAll, filterType, searchTerm]); // Add filterType and searchTerm to dependencies
 
   const handleClick = (eventId) => {
     navigate(`/events/${eventId}`);
@@ -68,14 +76,45 @@ export default function UpcomingEvents() {
   }
 
   if (loading) return <Loading />;
+  const applyFiltersAndSearch = (eventsToFilter, type, term) => {
+    let filtered = eventsToFilter;
 
+    // Apply search term first
+    if (term) {
+      filtered = filtered.filter(
+        (event) =>
+          event.title.toLowerCase().includes(term.toLowerCase()) ||
+          event.location.toLowerCase().includes(term.toLowerCase())
+        // Add more fields if needed for search
+      );
+    }
+
+    // Apply filter type based on event.type
+    // Only filter if type is not "ALL"
+    if (type !== "All") {
+      filtered = filtered.filter((event) => {
+        // Ensure event.type exists and convert both to lowercase for case-insensitive comparison
+        return event.type && event.type.toLowerCase() === type.toLowerCase();
+      });
+    }
+    return filtered;
+  };
+  // Apply filters and search to the original events array
+  const currentFilteredEvents = applyFiltersAndSearch(
+    events,
+    filterType,
+    searchTerm
+  );
+
+  // Determine events to display based on showAll and pagination
   let displayedEvents;
   if (showAll) {
     const startIndex = (currentPage - 1) * eventsPerPage;
     const endIndex = startIndex + eventsPerPage;
-    displayedEvents = events.slice(startIndex, endIndex);
+    displayedEvents = currentFilteredEvents.slice(startIndex, endIndex);
   } else {
-    displayedEvents = events.slice(0, 2);
+    // Show only 2 events if not expanded, but still from the filtered list
+    displayedEvents = currentFilteredEvents.slice(0, 2);
   }
 
   return (
@@ -84,9 +123,50 @@ export default function UpcomingEvents() {
         Upcoming Events
       </h2>
       {error && <p className="text-red-500">{error}</p>}
+
+      {/* Filter and Search Controls */}
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+        {/* Filter Select */}
+        <div className="w-full sm:w-auto">
+          <label htmlFor="eventFilter" className="sr-only">
+            Filter Events
+          </label>
+          <select
+            id="eventFilter"
+            className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+            value={filterType}
+            onChange={(e) => setFilterType(e.target.value)}
+          >
+            <option value="All">All Events</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Kids">Kids</option>
+          </select>
+        </div>
+
+        {/* Search Input */}
+        <div className="w-full sm:w-auto">
+          <label htmlFor="eventSearch" className="sr-only">
+            Search Events
+          </label>
+          <input
+            type="text"
+            id="eventSearch"
+            className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+            placeholder="Search events..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 items-center mx-auto w-full lg:w-3/4 ">
-        {events.length == 0 && <div> No events to display</div>}
-        {events.length > 0 &&
+        {currentFilteredEvents.length === 0 && (
+          <div className="col-span-full text-center text-gray-600">
+            No events to display with current filters/search.
+          </div>
+        )}
+        {currentFilteredEvents.length > 0 &&
           displayedEvents.map((event) => (
             <div
               key={event._id}
@@ -122,7 +202,7 @@ export default function UpcomingEvents() {
             </div>
           ))}
       </div>
-      {showAll && events.length > eventsPerPage && (
+      {showAll && currentFilteredEvents.length > eventsPerPage && (
         <div className="flex justify-center mt-4">
           <Pagination
             currentPage={currentPage}
@@ -131,7 +211,7 @@ export default function UpcomingEvents() {
           />
         </div>
       )}
-      {!showAll && events.length > 2 && (
+      {!showAll && currentFilteredEvents.length > 2 && (
         <div className="flex justify-center">
           <button
             onClick={handleExpand}
@@ -141,7 +221,7 @@ export default function UpcomingEvents() {
           </button>
         </div>
       )}
-      {showAll && events.length > 2 && (
+      {showAll && currentFilteredEvents.length > 2 && (
         <div className="flex justify-center">
           <button
             onClick={handleExpand}

@@ -95,6 +95,20 @@ export default function EventDetail() {
       <div className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed text-center px-28 flex items-center">
         <p>{event.body}</p>
       </div>
+      <div className="flex items-center justify-center mt-8">
+        {event.images && event.images.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 ">
+            {event.images.map((image, index) => (
+              <img
+                key={index}
+                src={`${api}/images/${image}`}
+                alt={`Event image ${index + 1}`}
+                className="w-full h-auto object-cover rounded-md shadow-md"
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

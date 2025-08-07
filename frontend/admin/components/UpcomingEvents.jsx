@@ -408,8 +408,8 @@ export default function UpcomingEvents() {
               >
                 <option value="">Select Category</option>{" "}
                 {/* Default/placeholder option */}
-                <option value="All">All</option>
-                <option value="Women">Women</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
                 <option value="Kids">Kids</option>
               </select>
             </div>
