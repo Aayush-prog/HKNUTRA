@@ -44,7 +44,6 @@ export default function SubSection({
   ]);
   const api = import.meta.env.VITE_URL;
   const { authToken } = useContext(AuthContext);
-
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title || "");
   const [editedBody, setEditedBody] = useState(body || "");
@@ -95,7 +94,7 @@ export default function SubSection({
       editedImages.forEach((file) => file && formData.append("images", file));
       formData.append("existingImages", JSON.stringify(existingImages));
 
-      const res = await axios.patch(`${api}/subsection/edit/${id}`, formData, {
+      const res = await axios.patch(`${api}/subSection/edit/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${authToken}`,
           "Content-Type": "multipart/form-data",
@@ -111,6 +110,7 @@ export default function SubSection({
         setAlignment(res.data.data.alignment);
         alert("saved");
       }
+      console.log(res.data);
       setIsEditing(false);
     } catch (error) {
       console.error("Save error:", error);
@@ -314,6 +314,7 @@ export default function SubSection({
           >
             <option value="normal">Normal</option>
             <option value="left">Left</option>
+            <option value="right">Right</option>
           </select>
         </div>
       </div>
@@ -340,7 +341,6 @@ export default function SubSection({
               <FaPen size={18} />
             </button>
           </div>
-          ;
           <div className="w-full sm:w-1/2 flex flex-col items-center">
             {image && (
               <motion.img
@@ -370,7 +370,7 @@ export default function SubSection({
                         src={`${api}/images/${img}`}
                         loading="lazy"
                         alt={img}
-                        className="h-[40vh] md:h-[70vh] object-fit  shadow-lg "
+                        className="h-[40vh] md:h-[70vh] object-fit shadow-lg "
                       />
                     </SwiperSlide>
                   );
@@ -394,6 +394,77 @@ export default function SubSection({
               >
                 {body}
               </motion.p>
+            )}
+          </div>
+        </motion.div>
+      );
+    } else if (alignment === "right") {
+      return (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className={`flex flex-col sm:flex-row items-center justify-center py-8 sm:py-12 md:py-16 text-center px-4 space-y-3 sm:space-y-4 md:space-y-5 ${
+            variant === "green" ? "bg-green-300 text-white" : "text-black"
+          }`}
+        >
+          {/* Text on the Left */}
+          <div className="w-full sm:w-1/2 flex flex-col items-center sm:order-1">
+            {title && (
+              <motion.h2
+                variants={childVariants}
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary"
+              >
+                {title}
+              </motion.h2>
+            )}
+            {body && (
+              <motion.p
+                variants={childVariants}
+                className="text-sm sm:text-base md:text-lg lg:text-xl font-primary justify-center leading-relaxed w-full sm:w-[100%] md:w-[90%] lg:w-[80%]"
+              >
+                {body}
+              </motion.p>
+            )}
+          </div>
+
+          {/* Image/Carousel on the Right */}
+          <div className="w-full sm:w-1/2 flex flex-col items-center sm:order-2">
+            {image && (
+              <motion.img
+                variants={childVariants}
+                src={`${api}/images/${image}`}
+                loading="lazy"
+                className="w-full sm:w-[110%] md:w-[100%] lg:w-[90%]"
+                alt={image}
+              />
+            )}
+            {images && (
+              <Swiper
+                modules={[Pagination, Autoplay]}
+                pagination={{ clickable: true }}
+                autoplay={{
+                  delay: 5000,
+                  disableOnInteraction: true,
+                }}
+                spaceBetween={30}
+                slidesPerView={1}
+                className="w-full md:w-3/4"
+              >
+                {images.map((img, idx) => {
+                  return (
+                    <SwiperSlide key={idx}>
+                      <img
+                        src={`${api}/images/${img}`}
+                        loading="lazy"
+                        alt={img}
+                        className=" w-full object-cover  shadow-lg "
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+              </Swiper>
             )}
           </div>
         </motion.div>

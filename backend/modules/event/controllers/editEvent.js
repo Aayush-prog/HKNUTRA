@@ -3,7 +3,8 @@ const path = require("path");
 const delImage = require("../../../handlers/delImage");
 const editEvent = async (req, res) => {
   const EventModel = mongoose.model("Event");
-  const { title, body, date, time, location, completed } = req.body;
+  const { title, body, date, time, location, completed, type, existingImages } =
+    req.body;
   const image = req.files?.image?.[0]
     ? path.basename(req.files.image[0].path)
     : null;
@@ -16,24 +17,26 @@ const editEvent = async (req, res) => {
         message: "Event not found",
       });
     }
-    let updatedHero;
+    let updatedEvent;
     if (image != null) {
       delImage(event.image);
-      updatedHero = await EventModel.findByIdAndUpdate(eventId, {
+      updatedEvent = await EventModel.findByIdAndUpdate(eventId, {
         title,
         image,
         body,
         date: new Date(date),
         time,
+        type,
         location,
         completed,
       });
     } else {
-      updatedHero = await EventModel.findByIdAndUpdate(eventId, {
+      updatedEvent = await EventModel.findByIdAndUpdate(eventId, {
         title,
         body,
         date: new Date(date),
         time,
+        type,
         location,
         completed,
       });

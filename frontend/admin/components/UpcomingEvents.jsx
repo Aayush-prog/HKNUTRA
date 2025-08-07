@@ -26,10 +26,45 @@ export default function UpcomingEvents() {
     image: null,
     date: "",
     time: "",
+    type: "",
     location: "",
+    images: [],
   });
   const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const handleDeleteImage = (indexToDelete) => {
+    // Remove the image from newEvent.images
+    setNewEvent((prevEvent) => ({
+      ...prevEvent,
+      images: prevEvent.images.filter((_, index) => index !== indexToDelete),
+    }));
 
+    // Remove the corresponding preview URL
+    setImagePreviews((prevPreviews) =>
+      prevPreviews.filter((_, index) => index !== indexToDelete)
+    );
+  };
+  const handleImagesChange = (e) => {
+    const files = Array.from(e.target.files); // Convert FileList to an array
+
+    if (files.length > 0) {
+      // Update newEvent.images with the new File objects
+      setNewEvent((prevEvent) => ({
+        ...prevEvent,
+        images: [...prevEvent.images, ...files],
+      }));
+
+      // Generate URLs for preview and update imagePreviews
+      const newImagePreviews = files.map((file) => URL.createObjectURL(file));
+      setImagePreviews((prevPreviews) => [
+        ...prevPreviews,
+        ...newImagePreviews,
+      ]);
+
+      // Clear the input value so the same file can be selected again if needed
+      e.target.value = null;
+    }
+  };
   const fetchEvents = async () => {
     try {
       setLoading(true);
@@ -119,14 +154,17 @@ export default function UpcomingEvents() {
       formData.append("time", newEvent.time);
       formData.append("location", newEvent.location);
       formData.append("complete", false);
-
+      formData.append("type", newEvent.type);
+      newEvent.images.forEach((imageFile, index) => {
+        formData.append(`images`, imageFile);
+      });
       const response = await axios.post(`${api}/event/create`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${authToken}`,
         },
       });
-
+      console.log(response.data);
       if (response.status === 201) {
         alert("success");
         fetchEvents();
@@ -138,8 +176,11 @@ export default function UpcomingEvents() {
           date: "",
           time: "",
           location: "",
+          type: "",
+          images: [],
         });
         setImagePreview(null);
+        setImagePreviews([]);
       } else {
         setError(response.data.message);
       }
@@ -158,9 +199,12 @@ export default function UpcomingEvents() {
       image: null,
       date: "",
       time: "",
+      type: "",
+      images: [],
       location: "",
     });
     setImagePreview(null);
+    setImagePreviews([]);
     setError(null);
   };
 
@@ -350,6 +394,27 @@ export default function UpcomingEvents() {
             </div>
             <div className="mb-4 md:w-full">
               <label
+                htmlFor="type"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Category:
+              </label>
+              <select
+                id="type"
+                name="type"
+                value={newEvent.type}
+                onChange={handleInputChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="">Select Category</option>{" "}
+                {/* Default/placeholder option */}
+                <option value="All">All</option>
+                <option value="Women">Women</option>
+                <option value="Kids">Kids</option>
+              </select>
+            </div>
+            <div className="mb-4 md:w-full">
+              <label
                 htmlFor="body"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
@@ -384,6 +449,50 @@ export default function UpcomingEvents() {
                   alt="Preview"
                   className="mt-2 max-h-40"
                 />
+              )}
+            </div>
+            <div className="mb-4 md:w-full">
+              <label
+                htmlFor="imageUpload"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Add Images:
+              </label>
+              <input
+                type="file"
+                id="imageUpload"
+                name="imageUpload"
+                multiple
+                onChange={handleImagesChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                accept="image/*"
+              />
+
+              {/* Image Previews Section */}
+              {imagePreviews.length > 0 && (
+                <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {imagePreviews.map((src, index) => (
+                    <div
+                      key={index}
+                      className="relative w-full h-32 overflow-hidden rounded-lg shadow-md"
+                    >
+                      <img
+                        src={src}
+                        alt={`Preview ${index}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteImage(index)}
+                        className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 text-xs w-6 h-6 flex items-center justify-center hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                        aria-label={`Delete image ${index + 1}`}
+                      >
+                        &times;{" "}
+                        {/* HTML entity for a multiplication sign (X) */}
+                      </button>
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
             <div className="flex justify-end md:w-full">

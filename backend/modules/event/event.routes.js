@@ -11,7 +11,7 @@ const eventRouter = express.Router();
 eventRouter.get("/upcoming", getEvent);
 eventRouter.get("/past", getPastEvent);
 eventRouter.get("/getById/:eventId", getEventById);
-eventRouter.use(auth);
+// eventRouter.use(auth);
 eventRouter.post("/create", upload, createEvent);
 eventRouter.delete("/del/:eventId", delEvent);
 eventRouter.patch("/edit/:eventId", upload, editEvent);

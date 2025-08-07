@@ -66,7 +66,7 @@ export default function HeroSection(props) {
         alt="Background"
         className="w-full h-full object-cover"
       />
-      <h1 className="absolute bottom-4 right-0 max-w-[90vw] sm:max-w-[50vw] lg:max-w-[25vw] bg-yellow-400 text-primary font-bold text-lg sm:text-xl md:text-2xl px-4 py-2 rounded shadow-lg">
+      <h1 className="absolute bottom-4 right-0 max-w-[90vw] sm:max-w-[50vw] lg:max-w-[30vw] bg-yellow-400 text-primary font-bold text-xl  md:text-4xl  lg:text-6xl px-4 py-2 rounded shadow-lg">
         {initialTitle}
       </h1>
     </>
@@ -115,7 +115,7 @@ export default function HeroSection(props) {
         type="text"
         value={editedTitle}
         onChange={(e) => setEditedTitle(e.target.value)}
-        className="absolute bottom-4 right-0 max-w-[90vw] sm:max-w-[50vw] lg:max-w-[25vw] bg-white text-primary font-bold text-lg sm:text-xl md:text-2xl px-4 py-2 rounded shadow-lg"
+        className="absolute bottom-4 right-0 max-w-[90vw] sm:max-w-[50vw] lg:max-w-[30vw] bg-yellow-400 text-primary font-bold text-xl  md:text-4xl  lg:text-6xl px-4 py-2 rounded shadow-lg"
       />
     </>
   );

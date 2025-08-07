@@ -24,9 +24,43 @@ export default function Posts() {
     title: "",
     body: "",
     image: null,
+    images: [],
   });
   const [imagePreview, setImagePreview] = useState(null);
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const handleDeleteImage = (indexToDelete) => {
+    // Remove the image from newEvent.images
+    setNewPost((prevPost) => ({
+      ...prevPost,
+      images: prevPost.images.filter((_, index) => index !== indexToDelete),
+    }));
 
+    // Remove the corresponding preview URL
+    setImagePreviews((prevPreviews) =>
+      prevPreviews.filter((_, index) => index !== indexToDelete)
+    );
+  };
+  const handleImagesChange = (e) => {
+    const files = Array.from(e.target.files); // Convert FileList to an array
+
+    if (files.length > 0) {
+      // Update newEvent.images with the new File objects
+      setNewPost((prevPost) => ({
+        ...prevPost,
+        images: [...prevPost.images, ...files],
+      }));
+
+      // Generate URLs for preview and update imagePreviews
+      const newImagePreviews = files.map((file) => URL.createObjectURL(file));
+      setImagePreviews((prevPreviews) => [
+        ...prevPreviews,
+        ...newImagePreviews,
+      ]);
+
+      // Clear the input value so the same file can be selected again if needed
+      e.target.value = null;
+    }
+  };
   const fetchPosts = async () => {
     try {
       setLoading(true);
@@ -112,7 +146,9 @@ export default function Posts() {
       formData.append("title", newPost.title);
       formData.append("body", newPost.body);
       formData.append("image", newPost.image);
-
+      newPost.images.forEach((image) => {
+        formData.append("images", image);
+      });
       const response = await axios.post(`${api}/post/create`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -124,8 +160,9 @@ export default function Posts() {
         alert("success");
         fetchPosts();
         setShowAddPostForm(false);
-        setNewPost({ title: "", body: "", image: null });
+        setNewPost({ title: "", body: "", image: null, images: [] });
         setImagePreview(null);
+        setImagePreviews([]);
       } else {
         setError(response.data.message);
       }
@@ -138,8 +175,9 @@ export default function Posts() {
 
   const toggleAddPostForm = () => {
     setShowAddPostForm(!showAddPostForm);
-    setNewPost({ title: "", body: "", image: null });
+    setNewPost({ title: "", body: "", image: null, images: [] });
     setImagePreview(null);
+    setImagePreviews([]);
     setError(null);
   };
 
@@ -308,6 +346,50 @@ export default function Posts() {
                   alt="Preview"
                   className="mt-2 max-h-40"
                 />
+              )}
+            </div>
+            <div className="mb-4 md:w-full">
+              <label
+                htmlFor="imageUpload"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Add Images:
+              </label>
+              <input
+                type="file"
+                id="imageUpload"
+                name="imageUpload"
+                multiple
+                onChange={handleImagesChange}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                accept="image/*"
+              />
+
+              {/* Image Previews Section */}
+              {imagePreviews.length > 0 && (
+                <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {imagePreviews.map((src, index) => (
+                    <div
+                      key={index}
+                      className="relative w-full h-32 overflow-hidden rounded-lg shadow-md"
+                    >
+                      <img
+                        src={src}
+                        alt={`Preview ${index}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteImage(index)}
+                        className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 text-xs w-6 h-6 flex items-center justify-center hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+                        aria-label={`Delete image ${index + 1}`}
+                      >
+                        &times;{" "}
+                        {/* HTML entity for a multiplication sign (X) */}
+                      </button>
+                    </div>
+                  ))}
+                </div>
               )}
             </div>
             <div className="flex justify-end md:w-full">

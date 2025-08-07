@@ -110,6 +110,77 @@ export default function SubSection({
         </div>
       </motion.div>
     );
+  } else if (alignment === "right") {
+    return (
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className={`flex flex-col sm:flex-row items-center justify-center py-8 sm:py-12 md:py-16 text-center px-4 space-y-3 sm:space-y-4 md:space-y-5 ${
+          variant === "green" ? "bg-green-300 text-white" : "text-black"
+        }`}
+      >
+        {/* Text on the Left */}
+        <div className="w-full sm:w-1/2 flex flex-col items-center sm:order-1">
+          {title && (
+            <motion.h2
+              variants={childVariants}
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary"
+            >
+              {title}
+            </motion.h2>
+          )}
+          {body && (
+            <motion.p
+              variants={childVariants}
+              className="text-sm sm:text-base md:text-lg lg:text-xl font-primary justify-center leading-relaxed w-full sm:w-[100%] md:w-[90%] lg:w-[80%]"
+            >
+              {body}
+            </motion.p>
+          )}
+        </div>
+
+        {/* Image/Carousel on the Right */}
+        <div className="w-full sm:w-1/2 flex flex-col items-center sm:order-2">
+          {image && (
+            <motion.img
+              variants={childVariants}
+              src={`${api}/images/${image}`}
+              loading="lazy"
+              className="w-full sm:w-[110%] md:w-[100%] lg:w-[90%]"
+              alt={image}
+            />
+          )}
+          {images && (
+            <Swiper
+              modules={[Pagination, Autoplay]}
+              pagination={{ clickable: true }}
+              autoplay={{
+                delay: 5000,
+                disableOnInteraction: true,
+              }}
+              spaceBetween={30}
+              slidesPerView={1}
+              className="w-full md:w-3/4"
+            >
+              {images.map((img, idx) => {
+                return (
+                  <SwiperSlide key={idx}>
+                    <img
+                      src={`${api}/images/${img}`}
+                      loading="lazy"
+                      alt={img}
+                      className=" w-full object-cover  shadow-lg "
+                    />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          )}
+        </div>
+      </motion.div>
+    );
   } else {
     // Original Structure when alignment is not left
     return (
