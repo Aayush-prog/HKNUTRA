@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaCalendar, FaClock } from "react-icons/fa";
+import { FaCalendar, FaClock, FaTrash } from "react-icons/fa";
 import { FaLocationPin } from "react-icons/fa6";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { useContext } from "react";
@@ -17,6 +17,8 @@ export default function EventDetail() {
   const [isEditing, setIsEditing] = useState(false);
   const [editedEvent, setEditedEvent] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [editedImages, setEditedImages] = useState([]);
+  const [existingImages, setExistingImages] = useState([]);
   const navigate = useNavigate();
   const { authToken } = useContext(AuthContext);
   useEffect(() => {
@@ -28,12 +30,14 @@ export default function EventDetail() {
           setEvent(res.data.data);
           setEditedEvent({ ...res.data.data });
           setImagePreview(`${api}/images/${res.data.data.image}`);
+          setExistingImages(res.data.data.images || []);
           setError(null);
         } else {
           setError(res.data.message);
           setEvent(null);
           setEditedEvent(null);
           setImagePreview(null);
+          setExistingImages([]);
         }
       } catch (err) {
         console.error("Error fetching event data:", err);
@@ -48,7 +52,14 @@ export default function EventDetail() {
 
     fetchPage();
   }, [id, api]);
-
+  const removeExistingGalleryImage = (imgName) => {
+    setExistingImages(existingImages.filter((img) => img !== imgName));
+  };
+  const removeNewGalleryImage = (indexToRemove) => {
+    setEditedImages((prevImages) =>
+      prevImages.filter((_, index) => index !== indexToRemove)
+    );
+  };
   const formatDateToWord = (dateString) => {
     const date = new Date(dateString);
     const options = {
@@ -98,7 +109,8 @@ export default function EventDetail() {
       formData.append("date", editedEvent.date);
       formData.append("time", editedEvent.time);
       formData.append("location", editedEvent.location);
-
+      editedImages.forEach((file) => file && formData.append("images", file));
+      formData.append("existingImages", JSON.stringify(existingImages));
       const response = await axios.patch(`${api}/event/edit/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -305,6 +317,54 @@ export default function EventDetail() {
               onChange={handleInputChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
+          </div>
+          <div className="flex flex-col items-center px-2">
+            <label className="text-sm mb-1">Gallery Images:</label>
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={(e) =>
+                setEditedImages((prev) => [
+                  ...prev,
+                  ...Array.from(e.target.files),
+                ])
+              }
+              className="text-sm"
+            />
+
+            <div className="flex flex-wrap gap-2 mt-2">
+              {existingImages.map((img, idx) => (
+                <div key={idx} className="relative">
+                  <img
+                    src={`${api}/images/${img}`}
+                    alt={img}
+                    className="h-20 w-20 object-cover rounded"
+                  />
+                  <button
+                    onClick={() => removeExistingGalleryImage(img)}
+                    className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-1 text-xs"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              ))}
+              {editedImages.map((file, idx) => (
+                <div key={`new-${idx}`} className="relative">
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt="new"
+                    className="h-20 w-20 object-cover rounded"
+                  />
+                  <button
+                    onClick={() => removeNewGalleryImage(idx)}
+                    className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-1 text-xs"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="flex justify-center">
             <button

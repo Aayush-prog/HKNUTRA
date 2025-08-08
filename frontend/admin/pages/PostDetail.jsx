@@ -16,6 +16,8 @@ export default function PostDetail() {
   const [isEditing, setIsEditing] = useState(false);
   const [editedPost, setEditedPost] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [editedImages, setEditedImages] = useState([]);
+  const [existingImages, setExistingImages] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,12 +29,14 @@ export default function PostDetail() {
           setPost(res.data.data);
           setEditedPost({ ...res.data.data });
           setImagePreview(`${api}/images/${res.data.data.image}`);
+          setExistingImages(res.data.data.images || []);
           setError(null);
         } else {
           setError(res.data.message);
           setPost(null);
           setEditedPost(null);
           setImagePreview(null);
+          setExistingImages([]);
         }
       } catch (err) {
         console.error("Error fetching post data:", err);
@@ -47,7 +51,14 @@ export default function PostDetail() {
 
     fetchPage();
   }, [id, api]);
-
+  const removeExistingGalleryImage = (imgName) => {
+    setExistingImages(existingImages.filter((img) => img !== imgName));
+  };
+  const removeNewGalleryImage = (indexToRemove) => {
+    setEditedImages((prevImages) =>
+      prevImages.filter((_, index) => index !== indexToRemove)
+    );
+  };
   const formatDateToWord = (dateString) => {
     const date = new Date(dateString);
     const options = {
@@ -94,7 +105,8 @@ export default function PostDetail() {
       if (editedPost.image && typeof editedPost.image !== "string") {
         formData.append("image", editedPost.image);
       }
-
+      editedImages.forEach((file) => file && formData.append("images", file));
+      formData.append("existingImages", JSON.stringify(existingImages));
       const response = await axios.patch(`${api}/post/edit/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -253,7 +265,54 @@ export default function PostDetail() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
+          <div className="flex flex-col items-center px-2">
+            <label className="text-sm mb-1">Gallery Images:</label>
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={(e) =>
+                setEditedImages((prev) => [
+                  ...prev,
+                  ...Array.from(e.target.files),
+                ])
+              }
+              className="text-sm"
+            />
 
+            <div className="flex flex-wrap gap-2 mt-2">
+              {existingImages.map((img, idx) => (
+                <div key={idx} className="relative">
+                  <img
+                    src={`${api}/images/${img}`}
+                    alt={img}
+                    className="h-20 w-20 object-cover rounded"
+                  />
+                  <button
+                    onClick={() => removeExistingGalleryImage(img)}
+                    className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-1 text-xs"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              ))}
+              {editedImages.map((file, idx) => (
+                <div key={`new-${idx}`} className="relative">
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt="new"
+                    className="h-20 w-20 object-cover rounded"
+                  />
+                  <button
+                    onClick={() => removeNewGalleryImage(idx)}
+                    className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full p-1 text-xs"
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
           <div className="flex justify-center">
             <button
               onClick={handleSave}
