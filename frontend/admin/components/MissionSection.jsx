@@ -49,19 +49,19 @@ export default function MissionSection() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const { authToken } = useContext(AuthContext);
 
-  const iconMap = {
-    ...ReactIcons,
-  };
+  // const iconMap = {
+  //   ...ReactIcons,
+  // };
 
-  function IconRenderer({ iconName, color }) {
-    const IconComponent = iconMap[iconName];
-    if (!IconComponent) return <span>Icon not found</span>;
-    return (
-      <IconComponent
-        className={`mb-2 text-support text-3xl md:text-4xl lg:text-5xl inline-block ${color}`}
-      />
-    );
-  }
+  // function IconRenderer({ iconName, color }) {
+  //   const IconComponent = iconMap[iconName];
+  //   if (!IconComponent) return <span>Icon not found</span>;
+  //   return (
+  //     <IconComponent
+  //       className={`mb-2 text-support text-3xl md:text-4xl lg:text-5xl inline-block ${color}`}
+  //     />
+  //   );
+  // }
 
   const fetchMission = async () => {
     setLoading(true);
@@ -110,11 +110,9 @@ export default function MissionSection() {
     setIsAdding((prev) => !prev);
     setEditingIndex(null); // Ensure editing is cancelled
     setAddFormValues({
-      icon: "FaStar",
       title: "",
       body: "",
       image: null,
-      color: "text-blue-500",
     });
     setImagePreview(null);
   };
@@ -158,12 +156,10 @@ export default function MissionSection() {
   const handleSave = async () => {
     try {
       if (editingIndex === null) return;
-      const { _id, title, body, icon, color, image } = editFormValues;
+      const { _id, title, body, image } = editFormValues;
       const formData = new FormData();
       formData.append("title", title);
       formData.append("body", body);
-      formData.append("icon", icon);
-      formData.append("color", color);
       if (imageDeleted) {
         formData.append("imageDeleted", true);
       }
@@ -213,10 +209,8 @@ export default function MissionSection() {
   const handleAddMission = async () => {
     try {
       const formData = new FormData();
-      formData.append("icon", addFormValues.icon);
       formData.append("title", addFormValues.title);
       formData.append("body", addFormValues.body);
-      formData.append("color", addFormValues.color);
       if (addFormValues.image) {
         formData.append("image", addFormValues.image);
       }
@@ -296,7 +290,6 @@ export default function MissionSection() {
                   key={idx}
                 >
                   <div className="flex items-center justify-between w-full">
-                    <IconRenderer iconName={item.icon} color={item.color} />
                     <div className="flex gap-2">
                       <button
                         onClick={() => setEditingIndex(idx)}
@@ -313,9 +306,7 @@ export default function MissionSection() {
                     </div>
                   </div>
 
-                  <h3
-                    className={`text-md md:text-xl font-semibold ${item.color} mb-1`}
-                  >
+                  <h3 className={`text-md md:text-xl font-semibold mb-1`}>
                     {item.title}
                   </h3>
                   <p className="text-gray-600 text-base">{item.body}</p>
@@ -363,19 +354,11 @@ export default function MissionSection() {
       {isAdding && (
         <div className="w-full max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4">Add New Mission</h2>
-
+          {/* 
           <SearchableIconPicker
             selectedIcon={addFormValues.icon}
             setSelectedIcon={(icon) => handleAddChange("icon", icon)}
-          />
-
-          <input
-            type="text"
-            value={addFormValues.color}
-            onChange={(e) => handleAddChange("color", e.target.value)}
-            className="w-full border rounded p-2 mb-2"
-            placeholder="Color (e.g., text-blue-500)"
-          />
+          /> */}
 
           <input
             type="text"
@@ -431,7 +414,7 @@ export default function MissionSection() {
         <div className="w-full max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4">Edit Mission</h2>
 
-          <SearchableIconPicker
+          {/* <SearchableIconPicker
             selectedIcon={editFormValues.icon}
             setSelectedIcon={(icon) => handleEditChange("icon", icon)}
           />
@@ -442,7 +425,7 @@ export default function MissionSection() {
             onChange={(e) => handleEditChange("color", e.target.value)}
             className="w-full border rounded p-2 mb-2"
             placeholder="Color (e.g., text-blue-500)"
-          />
+          /> */}
 
           <input
             type="text"

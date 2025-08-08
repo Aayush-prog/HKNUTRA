@@ -3,66 +3,20 @@ import Logo from "../assets/logo.png";
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-white font-primary py-8 md:py-12">
+    <footer className="bg-primary text-white font-primary py-10 md:py-14">
       <div className="max-w-screen-xl mx-auto px-4">
-        {/* Top Grid Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-y-0 md:gap-12 lg:gap-20 text-center md:text-left">
-          {/* Column 1 - Logo & Copyright */}
-          <div className="flex flex-col items-center md:items-start">
+        {/* Logo and Social Icons Section */}
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 md:gap-0">
+          {/* Logo and Text */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <img src={Logo} alt="HKNUTRA Logo" className="w-32 md:w-40" />
-            <p className="mt-4 text-xs sm:text-sm md:text-base">
+            <p className="mt-4 text-xs sm:text-sm md:text-base text-gray-200">
               © {new Date().getFullYear()} HKNUTRA. All Rights Reserved.
             </p>
           </div>
 
-          {/* Column 2 - Quick Links */}
-          <div>
-            <h2 className="font-bold mb-3 text-sm sm:text-base md:text-lg">
-              Quick Links
-            </h2>
-            <ul className="space-y-2 text-xs sm:text-sm md:text-base">
-              {[
-                { href: "/admin/", label: "Home" },
-                { href: "/admin/community", label: "Community" },
-                { href: "/admin/about", label: "About Us" },
-                { href: "/admin/membership", label: "Membership" },
-                { href: "/admin/event", label: "Events" },
-              ].map(({ href, label }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    aria-label={`Go to ${label} page`}
-                    className="relative inline-block after:block after:h-[2px] after:w-0 after:bg-green-300 after:transition-all after:duration-300 after:origin-left hover:after:w-full focus:after:w-full focus:outline-none focus:ring-2 focus:ring-green-300 rounded"
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3 - Stay in Touch */}
-          <div>
-            <h2 className="font-bold mb-3 text-sm sm:text-base md:text-lg">
-              Stay In Touch
-            </h2>
-            <ul className="space-y-2 text-xs sm:text-sm md:text-base">
-              <li>
-                <a
-                  href="/contact-us"
-                  aria-label="Go to Contact Us page"
-                  className="relative inline-block after:block after:h-[2px] after:w-0 after:bg-green-300 after:transition-all after:duration-300 after:origin-left hover:after:w-full focus:after:w-full focus:outline-none focus:ring-2 focus:ring-green-300 rounded"
-                >
-                  Contact Us
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom Section - Social Icons */}
-        <div className="mt-10 md:mt-16 flex justify-center">
-          <div className="flex space-x-5 text-xl sm:text-2xl">
+          {/* Social Icons aligned with text */}
+          <div className="flex space-x-6 text-2xl mt-4 md:mt-0">
             {[
               { href: "#", Icon: FaFacebook, label: "Visit our Facebook page" },
               { href: "#", Icon: FaTwitter, label: "Visit our Twitter page" },
@@ -76,7 +30,7 @@ export default function Footer() {
                 key={label}
                 href={href}
                 aria-label={label}
-                className="transition-colors duration-300 hover:text-green-300 focus:outline-none focus:ring-2 focus:ring-green-300 rounded"
+                className="text-white hover:text-green-300 transition duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-green-300 rounded"
               >
                 <Icon />
               </a>

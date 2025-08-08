@@ -42,7 +42,7 @@ export default function Membership() {
         />
         <MembershipReason />
 
-        <div className="flex flex-wrap justify-center gap-8 py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center py-10 md:max-w-5xl mx-auto">
           <stripe-buy-button
             buy-button-id="buy_btn_1RtPIxCYZtStphAipMQbdcLs"
             publishable-key="pk_test_51RtN7kCYZtStphAiNyhyKONwYKK4g6V6RXbAn7Lgh13riGpUNetexKEruRoJ7xjk7OQyWgLkSFqAmQSadgS8iUyb00NAkaus1a"
