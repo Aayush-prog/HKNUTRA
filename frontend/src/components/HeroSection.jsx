@@ -4,7 +4,7 @@ export default function HeroSection(props) {
   const { image, title, id } = props;
   const api = import.meta.env.VITE_URL;
   return (
-    <div className="relative w-full h-[87vh] bg-gray-200 overflow-hidden">
+    <div className="relative w-full md:h-[87vh] bg-gray-200 overflow-hidden">
       <img
         src={`${api}/images/${image}`}
         alt="Background"

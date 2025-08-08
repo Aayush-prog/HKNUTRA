@@ -2,8 +2,7 @@ import { React, useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import axios from "axios";
 import { useParams } from "react-router";
-import { FaCalendar, FaClock } from "react-icons/fa";
-import { FaLocationPin } from "react-icons/fa6";
+import { FaCalendarWeek } from "react-icons/fa6";
 
 export default function PostDetail() {
   const { id } = useParams();
@@ -80,16 +79,16 @@ export default function PostDetail() {
 
       <div className="flex flex-col md:flex-row justify-evenly lg:items-center mb-6 px-8">
         <div className="flex items-center gap-2 text-lg text-gray-700">
-          <FaCalendar />
+          <FaCalendarWeek className="text-primary" />
           <p>{formatDateToWord(post.createdAt)}</p>
         </div>
       </div>
-      <div className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed text-center px-28 flex items-center">
+      <div className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed text-center px-4 sm:px-6 md:px-34 flex items-center">
         <p>{post.body}</p>
       </div>
-      <div className="flex items-center justify-center mt-8">
+      <div className="flex items-center mt-8 md:max-w-8xl justify-center mx-auto lg:mx-30 px-4">
         {post.images && post.images.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-5 mt-8 ">
             {post.images.map((image, index) => (
               <img
                 key={index}

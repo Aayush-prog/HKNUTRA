@@ -68,7 +68,9 @@ export default function MembershipReason() {
               </div>
             ))
           ) : (
-            <p>No membership reasons found.</p>
+            <div className="flex items-center justify-center h-full py-4">
+              <p className="text-center">No membership reasons found.</p>
+            </div>
           )}
         </div>
       </div>

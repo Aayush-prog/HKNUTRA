@@ -80,7 +80,7 @@ export default function MissionSection() {
         success.
       </p>
 
-      <div className="lg:flex lg:flex-wrap md:justify-center md:items-start gap-8">
+      <div className="lg:flex lg:flex-wrap md:justify-center md:items-start gap-8 px-2">
         <div
           id="leftDiv"
           className=" md:grid grid-cols-3 lg:block lg:w-5/12 mb-6 md:mb-0"
@@ -89,17 +89,11 @@ export default function MissionSection() {
           {mission.length > 0 &&
             mission.map((item, idx) => (
               <div
-                className="lg:flex text-center lg:text-left items-center gap-5 my-6"
+                className="lg:flex text-center lg:text-left items-center gap-5 my-6 "
                 key={idx}
               >
-                <IconRenderer
-                  iconName={item.icon}
-                  color={item.color}
-                />
                 <div>
-                  <h3
-                    className={`text-md md:text-xl font-semibold ${item.color} mb-1`}
-                  >
+                  <h3 className={`text-md md:text-xl font-semibold mb-1`}>
                     {item.title}
                   </h3>
                   <p className="text-gray-600 text-base">{item.body}</p>

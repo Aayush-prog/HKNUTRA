@@ -123,13 +123,13 @@ export default function PastEvents() {
       {/* Filter and Search Controls */}
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
         {/* Filter Select */}
-        <div className="w-full sm:w-auto">
+        <div className="relative w-full sm:w-auto">
           <label htmlFor="eventFilter" className="sr-only">
             Filter Events
           </label>
           <select
             id="eventFilter"
-            className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
+            className="block w-full appearance-none px-4 py-2 pr-10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm"
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
           >
@@ -138,6 +138,24 @@ export default function PastEvents() {
             <option value="Monthly">Monthly</option>
             <option value="Kids">Kids</option>
           </select>
+
+          {/* Custom SVG Arrow */}
+          <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center">
+            <svg
+              className="w-4 h-4 text-gray-500"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </div>
         </div>
 
         {/* Search Input */}

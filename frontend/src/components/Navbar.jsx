@@ -45,7 +45,7 @@ export default function Navbar() {
           ))}
         </ul>
         <button
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/membership")}
           className="hidden lg:block ml-2 px-4 py-1 bg-primary text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
         >
           Join Now
