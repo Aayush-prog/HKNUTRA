@@ -2,8 +2,10 @@ import { React, useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaCalendar, FaClock, FaTrash } from "react-icons/fa";
-import { FaLocationPin } from "react-icons/fa6";
+import { FaTrash } from "react-icons/fa";
+import { FaCalendarWeek } from "react-icons/fa6";
+import { FaRegClock } from "react-icons/fa6";
+import { FaLocationDot } from "react-icons/fa6";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthContext";
@@ -389,24 +391,24 @@ export default function EventDetail() {
 
           <div className="flex flex-col md:flex-row justify-evenly lg:items-center mb-4 px-8">
             <div className="flex items-center gap-2 text-lg text-gray-700">
-              <FaCalendar />
+              <FaCalendarWeek className="text-primary" />
               <p>{formatDateToWord(event.date)}</p>
             </div>
             <div className="flex items-center gap-2 text-lg text-gray-700">
-              <FaClock />
+              <FaRegClock className="text-primary" />
               <p>{event.time}</p>
             </div>
-            <div className="flex items-center gap-2 text-lg text-gray-700 mb-4">
-              <FaLocationPin />
+            <div className="flex items-center gap-2 text-lg text-gray-700">
+              <FaLocationDot className="text-primary" />
               <p>{event.location}</p>
             </div>
           </div>
-          <div className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed text-center px-28 flex items-center">
+          <div className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed text-center px-4 sm:px-6 md:px-34 flex items-center">
             <p>{event.body}</p>
           </div>
-          <div className="flex items-center justify-center mt-8">
+          <div className="flex items-center mt-8 md:max-w-8xl justify-center mx-auto lg:mx-30 px-4">
             {event.images && event.images.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 ">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-5 mt-8 ">
                 {event.images.map((image, index) => (
                   <img
                     key={index}
