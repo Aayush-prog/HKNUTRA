@@ -35,6 +35,7 @@ export default function Community() {
         <HeroSection
           title={community.heroSection.title}
           image={community.heroSection.image}
+          id={community.heroSection._id}
         />
         <SubSection
           initialTitle={community.subSection1.title}

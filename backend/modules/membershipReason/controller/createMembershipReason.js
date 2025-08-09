@@ -14,7 +14,7 @@ const createMembershipReason = async (req, res) => {
       image,
       body,
     });
-    res.status(200).json({
+    res.status(201).json({
       status: "success",
       data: newMembershipReason,
     });

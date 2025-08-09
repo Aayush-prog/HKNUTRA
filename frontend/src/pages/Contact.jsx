@@ -143,10 +143,25 @@ export default function Contact() {
             </motion.div>
             <motion.div className="w-full md:w-1/3" variants={childVariants}>
               <label
+                htmlFor="phone"
+                className="block text-gray-700 text-base font-bold mb-2"
+              >
+                Phone Number:
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Enter your phone"
+                className="appearance-none border-b w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+              />
+            </motion.div>
+            <motion.div className="w-full md:w-1/3" variants={childVariants}>
+              <label
                 htmlFor="email"
                 className="block text-gray-700 text-base font-bold mb-2"
               >
-                Email Address:
+                Email Address (optional):
               </label>
               <input
                 type="email"
@@ -154,21 +169,6 @@ export default function Contact() {
                 name="email"
                 placeholder="Enter your email"
                 required
-                className="appearance-none border-b w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-              />
-            </motion.div>
-            <motion.div className="w-full md:w-1/3" variants={childVariants}>
-              <label
-                htmlFor="phone"
-                className="block text-gray-700 text-base font-bold mb-2"
-              >
-                Phone Number (optional):
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="Enter your phone"
                 className="appearance-none border-b w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
               />
             </motion.div>

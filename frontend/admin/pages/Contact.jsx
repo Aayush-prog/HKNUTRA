@@ -40,6 +40,7 @@ export default function Contact() {
         <HeroSection
           title={contact.heroSection.title}
           image={contact.heroSection.image}
+          id={contact.heroSection._id}
         />
 
         <div className="flex flex-col md:flex-row justify-center gap-10 py-10 md:py-20 items-center px-4">

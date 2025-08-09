@@ -13,7 +13,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img src={Logo} alt="HKNUTRA Logo" className=" w-15  md:w-22 mr-3" />
-          <h2 className="text-lg sm:text-xl font-bold">HKNUTRA</h2>
+          <h2 className="text-4xl sm:text-2xl font-bold">HKNUTRA</h2>
         </Link>
 
         {/* Desktop menu */}
@@ -30,7 +30,9 @@ export default function Navbar() {
                 to={to}
                 className={({ isActive }) =>
                   `transition-colors duration-300 hover:text-green-600 ${
-                    isActive ? "text-green-600 font-semibold" : ""
+                    isActive
+                      ? "text-green-600 font-semibold text-lg"
+                      : "text-lg"
                   }`
                 }
                 aria-label={`Go to ${label} page`}
@@ -42,7 +44,7 @@ export default function Navbar() {
         </ul>
         <button
           onClick={() => navigate("/membership")}
-          className="hidden lg:block ml-2 px-4 py-1 bg-primary text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="hidden lg:block ml-2 px-4 py-1 bg-primary text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 text-lg"
         >
           Join Now
         </button>

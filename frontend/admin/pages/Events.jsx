@@ -36,6 +36,7 @@ export default function Events() {
         <HeroSection
           title={event.heroSection.title}
           image={event.heroSection.image}
+          id={event.heroSection._id}
         />
         <SubSection
           initialTitle={event.subSection1.title}

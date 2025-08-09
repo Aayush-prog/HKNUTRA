@@ -71,7 +71,7 @@ export default function MembershipReason() {
       <div className="lg:flex lg:flex-wrap md:justify-center md:items-start gap-8">
         <div
           id="leftDiv"
-          className="md:grid grid-cols-1 lg:block lg:w-5/12 mb-6 md:mb-0"
+          className="md:grid grid-cols-1 lg:block lg:w-3/4 mb-6 md:mb-0"
         >
           {loading ? (
             <Loading />
