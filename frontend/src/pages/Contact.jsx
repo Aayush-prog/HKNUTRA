@@ -16,7 +16,37 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const api = import.meta.env.VITE_URL;
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [formStatus, setFormStatus] = useState("");
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus("Sending...");
+
+    try {
+      const response = await axios.post(`${api}/sendMail`, formData);
+      if (response.status === 200) {
+        setFormStatus("Message sent successfully!");
+        setFormData({ name: "", email: "", phone: "", message: "" }); // Clear form
+      } else {
+        setFormStatus("Error sending message. Please try again.");
+      }
+    } catch (error) {
+      setFormStatus("Error sending message. Please try again.");
+      console.error("Error submitting form:", error);
+    }
+  };
   useEffect(() => {
     const fetchPage = async () => {
       setLoading(true);
@@ -118,6 +148,7 @@ export default function Contact() {
         </motion.div>
 
         <motion.form
+          onSubmit={handleSubmit}
           className="mx-auto w-full md:w-3/4 py-5 md:py-10 px-4"
           variants={childVariants}
         >
@@ -136,6 +167,8 @@ export default function Contact() {
                 type="text"
                 id="name"
                 name="name"
+                value={formData.name}
+                onChange={handleInputChange}
                 placeholder="Enter your name"
                 required
                 className="appearance-none border-b w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
@@ -152,6 +185,9 @@ export default function Contact() {
                 type="tel"
                 id="phone"
                 name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
                 placeholder="Enter your phone"
                 className="appearance-none border-b w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
               />
@@ -167,8 +203,9 @@ export default function Contact() {
                 type="email"
                 id="email"
                 name="email"
+                value={formData.email}
+                onChange={handleInputChange}
                 placeholder="Enter your email"
-                required
                 className="appearance-none border-b w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
               />
             </motion.div>
@@ -183,12 +220,16 @@ export default function Contact() {
             <textarea
               id="message"
               name="message"
+              value={formData.message}
+              onChange={handleInputChange}
               placeholder="Enter your message"
               required
               className="appearance-none border-b w-full px-3 text-gray-700 leading-tight focus:outline-none resize-none"
             />
           </motion.div>
+          {formStatus && <p className="mt-4 ">{formStatus}</p>}
           <motion.button
+            type="submit"
             className="flex items-center justify-center rounded px-4 py-2 mt-5 bg-primary text-white gap-3"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

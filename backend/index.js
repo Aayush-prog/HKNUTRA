@@ -7,6 +7,7 @@ require("dotenv").config();
 // Routes
 const login = require("./handlers/login.js");
 const { forgotPassword, resetPassword } = require("./handlers/forgotPass.js");
+const sendMail = require("./handlers/sendMail.js");
 const heroRouter = require("./modules/hero/hero.routes.js");
 const subSectionRouter = require("./modules/subSection/subSection.routes.js");
 const postRouter = require("./modules/post/post.routes.js");
@@ -46,6 +47,7 @@ app.post("/login", login);
 app.post("/forgotPass", forgotPassword);
 app.post("/resetPass/:token", resetPassword);
 app.use("/post", postRouter);
+app.use("/sendMail", sendMail);
 app.use("/event", eventRouter);
 app.use("/hero", heroRouter);
 app.use("/mission", missionRouter);
