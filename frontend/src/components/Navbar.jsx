@@ -88,7 +88,7 @@ export default function Navbar() {
               <button
                 onClick={() => {
                   setMenuOpen(false);
-                  navigate("/login");
+                  navigate("/membership");
                 }}
                 className="w-full px-4 py-2 bg-primary text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
               >
