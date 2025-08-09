@@ -92,7 +92,7 @@ export default function PastEvents() {
   }, [events, showAll]);
 
   const handleClick = (eventId) => {
-    navigate(`/events/${eventId}`);
+    navigate(`/admin/events/${eventId}`);
   };
 
   const handleExpand = () => {
