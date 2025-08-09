@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import { MdArrowOutward } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
+import { motion } from "framer-motion";
 
 export default function Posts() {
   const api = import.meta.env.VITE_URL;
@@ -67,6 +68,29 @@ export default function Posts() {
     return date.toLocaleDateString(undefined, options);
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
   if (loading) return <Loading />;
 
   let displayedPosts;
@@ -79,15 +103,38 @@ export default function Posts() {
   }
 
   return (
-    <div className="p-4 md:p-8 lg:p-20">
+    <motion.div
+      className="p-4 md:p-8 lg:p-20"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
+    >
       {error && <p className="text-red-500">{error}</p>}
-      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 items-center mx-auto w-full lg:w-3/4 ">
-        {posts.length == 0 && <div> No posts to display</div>}
+      <motion.div
+        className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 items-center mx-auto w-full lg:w-3/4 "
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        key={currentPage}
+      >
+        {posts.length === 0 && (
+          <motion.div
+            className="col-span-full text-center text-gray-600"
+            variants={childVariants}
+          >
+            No posts to display
+          </motion.div>
+        )}
         {posts.length > 0 &&
           displayedPosts.map((post) => (
-            <div
+            <motion.div
               key={post._id}
               className="relative mb-4 rounded-2xl overflow-hidden group h-[300px] sm:h-[350px] md:h-[400px]"
+              variants={childVariants}
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
               <img
                 src={`${api}/images/${post.image}`}
@@ -116,38 +163,41 @@ export default function Posts() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-      </div>
+      </motion.div>
       {showAll && posts.length > postsPerPage && (
-        <div className="flex justify-center mt-4">
+        <motion.div
+          className="flex justify-center mt-4"
+          variants={childVariants}
+        >
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={handlePageChange}
           />
-        </div>
+        </motion.div>
       )}
       {!showAll && posts.length > 2 && (
-        <div className="flex justify-center">
+        <motion.div className="flex justify-center" variants={childVariants}>
           <button
             onClick={handleExpand}
             className="mt-4 px-6 py-2 bg-primary text-white rounded hover:bg-green-6000"
           >
             See All
           </button>
-        </div>
+        </motion.div>
       )}
       {showAll && posts.length > 2 && (
-        <div className="flex justify-center">
+        <motion.div className="flex justify-center" variants={childVariants}>
           <button
             onClick={handleExpand}
             className="mt-4 px-6 py-2 bg-primary text-white rounded hover:bg-green-600"
           >
             Show Less
           </button>
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }

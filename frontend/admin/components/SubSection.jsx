@@ -149,10 +149,7 @@ export default function SubSection({
   };
 
   const renderEditMode = () => (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
+    <div
       className={`relative flex flex-col items-center justify-center py-8 sm:py-12 md:py-16 px-4 space-y-4 ${
         editedVariant === "green" ? "bg-green-300 text-white" : "text-black"
       }`}
@@ -173,16 +170,14 @@ export default function SubSection({
         </button>
       </div>
 
-      <motion.input
-        variants={childVariants}
+      <input
         type="text"
         value={editedTitle}
         onChange={(e) => setEditedTitle(e.target.value)}
         placeholder="Title"
         className="text-2xl sm:text-3xl md:text-4xl font-bold font-secondary bg-transparent border-b border-gray-400 focus:outline-none focus:border-primary w-full max-w-2xl"
       />
-      <motion.textarea
-        variants={childVariants}
+      <textarea
         value={editedBody}
         onChange={(e) => setEditedBody(e.target.value)}
         rows={3}
@@ -190,8 +185,7 @@ export default function SubSection({
         className="text-base md:text-lg lg:text-xl font-primary bg-transparent border border-gray-400 rounded p-2 focus:outline-none focus:border-primary w-full max-w-2xl"
       />
       {body2 !== undefined && (
-        <motion.textarea
-          variants={childVariants}
+        <textarea
           value={editedBody2}
           onChange={(e) => setEditedBody2(e.target.value)}
           rows={3}
@@ -201,10 +195,7 @@ export default function SubSection({
       )}
 
       {/* Main Image Upload + Preview */}
-      <motion.div
-        variants={childVariants}
-        className="flex flex-col items-center"
-      >
+      <div className="flex flex-col items-center">
         <label className="text-sm mb-1">Main Image:</label>
         <input
           type="file"
@@ -240,13 +231,10 @@ export default function SubSection({
             </button>
           )}
         </div>
-      </motion.div>
+      </div>
 
       {/* Gallery Images */}
-      <motion.div
-        variants={childVariants}
-        className="flex flex-col items-center"
-      >
+      <div className="flex flex-col items-center">
         <label className="text-sm mb-1">Gallery Images:</label>
         <input
           type="file"
@@ -290,7 +278,7 @@ export default function SubSection({
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Variant & Alignment */}
       <div className="flex space-x-4 mt-2">
@@ -318,17 +306,13 @@ export default function SubSection({
           </select>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 
   const renderDisplayMode = () => {
     if (alignment === "left") {
       return (
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+        <div
           className={`flex flex-col sm:flex-row items-center justify-center  py-8 sm:py-12 md:py-16 text-center px-4 space-y-3 sm:space-y-4 md:space-y-5 ${
             variant === "green" ? "bg-green-300 text-white" : "text-black"
           }`}
@@ -343,8 +327,7 @@ export default function SubSection({
           </div>
           <div className="w-full sm:w-1/2 flex flex-col items-center">
             {image && (
-              <motion.img
-                variants={childVariants}
+              <img
                 src={`${api}/images/${image}`}
                 loading="lazy"
                 className="w-full sm:w-[110%] md:w-[100%] lg:w-[90%]"
@@ -380,31 +363,21 @@ export default function SubSection({
           </div>
           <div className="w-full sm:w-1/2 flex flex-col items-start">
             {title && (
-              <motion.h2
-                variants={childVariants}
-                className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary"
-              >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary">
                 {title}
-              </motion.h2>
+              </h2>
             )}
             {body && (
-              <motion.p
-                variants={childVariants}
-                className="text-sm sm:text-base md:text-lg lg:text-xl font-primary justify-center leading-relaxed w-full sm:w-[100%] md:w-[90%] lg:w-[80%]"
-              >
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl font-primary justify-center leading-relaxed w-full sm:w-[100%] md:w-[90%] lg:w-[80%]">
                 {body}
-              </motion.p>
+              </p>
             )}
           </div>
-        </motion.div>
+        </div>
       );
     } else if (alignment === "right") {
       return (
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+        <div
           className={`flex flex-col sm:flex-row items-center justify-center py-8 sm:py-12 md:py-16 text-center px-4 space-y-3 sm:space-y-4 md:space-y-5 ${
             variant === "green" ? "bg-green-300 text-white" : "text-black"
           }`}
@@ -412,28 +385,21 @@ export default function SubSection({
           {/* Text on the Left */}
           <div className="w-full sm:w-1/2 flex flex-col items-center sm:order-1">
             {title && (
-              <motion.h2
-                variants={childVariants}
-                className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary"
-              >
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary">
                 {title}
-              </motion.h2>
+              </h2>
             )}
             {body && (
-              <motion.p
-                variants={childVariants}
-                className="text-sm sm:text-base md:text-lg lg:text-xl font-primary justify-center leading-relaxed w-full sm:w-[100%] md:w-[90%] lg:w-[80%]"
-              >
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl font-primary justify-center leading-relaxed w-full sm:w-[100%] md:w-[90%] lg:w-[80%]">
                 {body}
-              </motion.p>
+              </p>
             )}
           </div>
 
           {/* Image/Carousel on the Right */}
           <div className="w-full sm:w-1/2 flex flex-col items-center sm:order-2">
             {image && (
-              <motion.img
-                variants={childVariants}
+              <img
                 src={`${api}/images/${image}`}
                 loading="lazy"
                 className="w-full sm:w-[110%] md:w-[100%] lg:w-[90%]"
@@ -467,12 +433,12 @@ export default function SubSection({
               </Swiper>
             )}
           </div>
-        </motion.div>
+        </div>
       );
     } else {
       // Original Structure when alignment is not left
       return (
-        <motion.div
+        <div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -491,8 +457,7 @@ export default function SubSection({
           </div>
           ;
           {image && (
-            <motion.img
-              variants={childVariants}
+            <img
               src={`${api}/images/${image}`}
               loading="lazy"
               className="w-full sm:w-[110vw] md:w-[100vw] lg:w-[60vw]"
@@ -526,30 +491,21 @@ export default function SubSection({
             </Swiper>
           )}
           {title && (
-            <motion.h2
-              variants={childVariants}
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary"
-            >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary">
               {title}
-            </motion.h2>
+            </h2>
           )}
           {body && (
-            <motion.p
-              variants={childVariants}
-              className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed w-full sm:w-[80vw] md:w-[70vw] lg:w-[55vw]"
-            >
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed w-full sm:w-[80vw] md:w-[70vw] lg:w-[55vw]">
               {body}
-            </motion.p>
+            </p>
           )}
           {body2 && (
-            <motion.p
-              variants={childVariants}
-              className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed w-full sm:w-[80vw] md:w-[70vw] lg:w-[55vw]"
-            >
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed w-full sm:w-[80vw] md:w-[70vw] lg:w-[55vw]">
               {body2}
-            </motion.p>
+            </p>
           )}
-        </motion.div>
+        </div>
       );
     }
   };

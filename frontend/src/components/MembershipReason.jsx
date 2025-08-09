@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 export default function MembershipReason() {
   const api = import.meta.env.VITE_URL;
@@ -29,11 +30,43 @@ export default function MembershipReason() {
     fetchMembershipReason();
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
   return (
-    <div className="container mx-auto px-6 py-8">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center">
+    <motion.div
+      className="container mx-auto px-6 py-8"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
+    >
+      <motion.h2
+        className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center"
+        variants={childVariants}
+      >
         More Than a Membership
-      </h2>
+      </motion.h2>
 
       <div className="lg:flex lg:flex-wrap md:justify-center md:items-start gap-8">
         <div
@@ -43,14 +76,17 @@ export default function MembershipReason() {
           {loading ? (
             <Loading />
           ) : error ? (
-            <p className="text-red-500">{error}</p>
+            <motion.p className="text-red-500" variants={childVariants}>
+              {error}
+            </motion.p>
           ) : membershipReason.length > 0 ? (
             membershipReason.map((item, idx) => (
-              <div
+              <motion.div
                 className={`flex flex-col md:flex-row items-center gap-5 my-6 ${
                   idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
                 key={idx}
+                variants={childVariants}
               >
                 <div className="w-full md:w-1/2">
                   <img
@@ -65,15 +101,18 @@ export default function MembershipReason() {
                   </h3>
                   <p className="text-gray-600 text-base">{item.body}</p>
                 </div>
-              </div>
+              </motion.div>
             ))
           ) : (
-            <div className="flex items-center justify-center h-full py-4">
+            <motion.div
+              className="flex items-center justify-center h-full py-4"
+              variants={childVariants}
+            >
               <p className="text-center">No membership reasons found.</p>
-            </div>
+            </motion.div>
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

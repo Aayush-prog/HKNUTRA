@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import { MdArrowOutward } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
+import { motion } from "framer-motion";
 
 export default function PastEvents() {
   const api = import.meta.env.VITE_URL;
@@ -18,6 +19,7 @@ export default function PastEvents() {
   const eventsPerPage = 6;
   const [filterType, setFilterType] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+
   const fetchEvents = async () => {
     try {
       setLoading(true);
@@ -38,7 +40,6 @@ export default function PastEvents() {
     fetchEvents();
   }, []);
 
-  // Recalculate total pages and reset current page whenever events or filters change
   useEffect(() => {
     const currentFilteredEvents = applyFiltersAndSearch(
       events,
@@ -46,8 +47,8 @@ export default function PastEvents() {
       searchTerm
     );
     setTotalPages(Math.ceil(currentFilteredEvents.length / eventsPerPage));
-    setCurrentPage(1); // Reset to first page when filters change
-  }, [events, showAll, filterType, searchTerm]); // Add filterType and searchTerm to dependencies
+    setCurrentPage(1);
+  }, [events, showAll, filterType, searchTerm]);
 
   const handleClick = (eventId) => {
     navigate(`/events/${eventId}`);
@@ -72,57 +73,84 @@ export default function PastEvents() {
     return date.toLocaleDateString(undefined, options);
   }
 
-  if (loading) return <Loading />;
   const applyFiltersAndSearch = (eventsToFilter, type, term) => {
     let filtered = eventsToFilter;
 
-    // Apply search term first
     if (term) {
       filtered = filtered.filter(
         (event) =>
           event.title.toLowerCase().includes(term.toLowerCase()) ||
           event.location.toLowerCase().includes(term.toLowerCase())
-        // Add more fields if needed for search
       );
     }
 
-    // Apply filter type based on event.type
-    // Only filter if type is not "ALL"
     if (type !== "All") {
       filtered = filtered.filter((event) => {
-        // Ensure event.type exists and convert both to lowercase for case-insensitive comparison
         return event.type && event.type.toLowerCase() === type.toLowerCase();
       });
     }
     return filtered;
   };
-  // Apply filters and search to the original events array
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
+  if (loading) return <Loading />;
+
   const currentFilteredEvents = applyFiltersAndSearch(
     events,
     filterType,
     searchTerm
   );
 
-  // Determine events to display based on showAll and pagination
   let displayedEvents;
   if (showAll) {
     const startIndex = (currentPage - 1) * eventsPerPage;
     const endIndex = startIndex + eventsPerPage;
     displayedEvents = currentFilteredEvents.slice(startIndex, endIndex);
   } else {
-    // Show only 2 events if not expanded, but still from the filtered list
     displayedEvents = currentFilteredEvents.slice(0, 2);
   }
 
   return (
-    <div className="p-4 md:p-8 lg:p-20">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center mb-8">
+    <motion.div
+      className="p-4 md:p-8 lg:p-20"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
+    >
+      <motion.h2
+        className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center mb-8"
+        variants={childVariants}
+      >
         Past Events
-      </h2>
+      </motion.h2>
       {error && <p className="text-red-500 text-center">{error}</p>}
-      {/* Filter and Search Controls */}
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
-        {/* Filter Select */}
+      <motion.div
+        className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8"
+        variants={childVariants}
+      >
         <div className="relative w-full sm:w-auto">
           <label htmlFor="eventFilter" className="sr-only">
             Filter Events
@@ -139,7 +167,6 @@ export default function PastEvents() {
             <option value="Kids">Kids</option>
           </select>
 
-          {/* Custom SVG Arrow */}
           <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center">
             <svg
               className="w-4 h-4 text-gray-500"
@@ -158,7 +185,6 @@ export default function PastEvents() {
           </div>
         </div>
 
-        {/* Search Input */}
         <div className="w-full sm:w-auto">
           <label htmlFor="eventSearch" className="sr-only">
             Search Events
@@ -172,18 +198,31 @@ export default function PastEvents() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-      </div>
-      <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 items-center mx-auto w-full lg:w-3/4 ">
+      </motion.div>
+      <motion.div
+        className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 items-center mx-auto w-full lg:w-3/4 "
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        key={filterType + searchTerm + currentPage}
+      >
         {currentFilteredEvents.length === 0 && (
-          <div className="col-span-full text-center text-gray-600">
+          <motion.div
+            className="col-span-full text-center text-gray-600"
+            variants={childVariants}
+          >
             No events to display with current filters/search.
-          </div>
+          </motion.div>
         )}
         {currentFilteredEvents.length > 0 &&
           displayedEvents.map((event) => (
-            <div
+            <motion.div
               key={event._id}
               className="relative mb-4 rounded-2xl overflow-hidden group h-[300px] sm:h-[350px] md:h-[400px]"
+              variants={childVariants}
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
               <img
                 src={`${api}/images/${event.image}`}
@@ -212,38 +251,41 @@ export default function PastEvents() {
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-      </div>
+      </motion.div>
       {showAll && currentFilteredEvents.length > eventsPerPage && (
-        <div className="flex justify-center mt-4">
+        <motion.div
+          className="flex justify-center mt-4"
+          variants={childVariants}
+        >
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={handlePageChange}
           />
-        </div>
+        </motion.div>
       )}
       {!showAll && currentFilteredEvents.length > 2 && (
-        <div className="flex justify-center">
+        <motion.div className="flex justify-center" variants={childVariants}>
           <button
             onClick={handleExpand}
             className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-600"
           >
             See All
           </button>
-        </div>
+        </motion.div>
       )}
       {showAll && currentFilteredEvents.length > 2 && (
-        <div className="flex justify-center">
+        <motion.div className="flex justify-center" variants={childVariants}>
           <button
             onClick={handleExpand}
             className="mt-4 px-4 py-2 bg-primary text-white rounded hover:bg-green-600"
           >
             Show Less
           </button>
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }

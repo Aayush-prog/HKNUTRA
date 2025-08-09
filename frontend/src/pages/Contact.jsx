@@ -1,9 +1,10 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import HeroSection from "../components/HeroSection";
 import { FaArrowRight, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   const [contact, setContact] = useState();
@@ -31,6 +32,29 @@ export default function Contact() {
     fetchPage();
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
   if (loading) return <Loading />;
 
   return (
@@ -41,8 +65,17 @@ export default function Contact() {
           image={contact.heroSection.image}
         />
 
-        <div className="flex flex-col md:flex-row justify-center gap-10 py-10 md:py-20 items-center px-4">
-          <div className="flex flex-col gap-5 text-center md:text-left">
+        <motion.div
+          className="flex flex-col md:flex-row justify-center gap-10 py-10 md:py-20 items-center px-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={containerVariants}
+        >
+          <motion.div
+            className="flex flex-col gap-5 text-center md:text-left"
+            variants={childVariants}
+          >
             <h2 className="text-3xl md:text-4xl font-bold text-primary">
               We'd love to hear from you
             </h2>
@@ -50,23 +83,44 @@ export default function Contact() {
               Whether you're curious about joining, have a question, or want to
               partner with us
             </p>
-          </div>
-          <div className="flex flex-row md:flex-col gap-4 text-3xl md:text-xl">
-            <a href="#" className="hover:text-blue-600">
+          </motion.div>
+          <motion.div
+            className="flex flex-row md:flex-col gap-4 text-3xl md:text-xl"
+            variants={childVariants}
+          >
+            <motion.a
+              href="#"
+              className="hover:text-blue-600"
+              whileHover={{ scale: 1.1 }}
+            >
               <FaFacebook />
-            </a>
-            <a href="#" className="hover:text-pink-600">
+            </motion.a>
+            <motion.a
+              href="#"
+              className="hover:text-pink-600"
+              whileHover={{ scale: 1.1 }}
+            >
               <FaInstagram />
-            </a>
-            <a href="#" className="hover:text-blue-400">
+            </motion.a>
+            <motion.a
+              href="#"
+              className="hover:text-blue-400"
+              whileHover={{ scale: 1.1 }}
+            >
               <FaXTwitter />
-            </a>
-          </div>
-        </div>
+            </motion.a>
+          </motion.div>
+        </motion.div>
 
-        <form className="mx-auto w-full md:w-3/4 py-5 md:py-10 px-4">
-          <div className="flex flex-col md:flex-row gap-5 mb-5">
-            <div className="w-full md:w-1/3">
+        <motion.form
+          className="mx-auto w-full md:w-3/4 py-5 md:py-10 px-4"
+          variants={childVariants}
+        >
+          <motion.div
+            className="flex flex-col md:flex-row gap-5 mb-5"
+            variants={childVariants}
+          >
+            <motion.div className="w-full md:w-1/3" variants={childVariants}>
               <label
                 htmlFor="name"
                 className="block text-gray-700 text-base font-bold mb-2"
@@ -81,8 +135,8 @@ export default function Contact() {
                 required
                 className="appearance-none border-b w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
               />
-            </div>
-            <div className="w-full md:w-1/3">
+            </motion.div>
+            <motion.div className="w-full md:w-1/3" variants={childVariants}>
               <label
                 htmlFor="email"
                 className="block text-gray-700 text-base font-bold mb-2"
@@ -97,8 +151,8 @@ export default function Contact() {
                 required
                 className="appearance-none border-b w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
               />
-            </div>
-            <div className="w-full md:w-1/3">
+            </motion.div>
+            <motion.div className="w-full md:w-1/3" variants={childVariants}>
               <label
                 htmlFor="phone"
                 className="block text-gray-700 text-base font-bold mb-2"
@@ -112,9 +166,9 @@ export default function Contact() {
                 placeholder="Enter your phone"
                 className="appearance-none border-b w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
               />
-            </div>
-          </div>
-          <div className="mb-5">
+            </motion.div>
+          </motion.div>
+          <motion.div className="mb-5" variants={childVariants}>
             <label
               htmlFor="message"
               className="block text-gray-700 text-base font-bold mb-2"
@@ -128,20 +182,31 @@ export default function Contact() {
               required
               className="appearance-none border-b w-full px-3 text-gray-700 leading-tight focus:outline-none resize-none"
             />
-          </div>
-          <button className="flex items-center justify-center rounded px-4 py-2 mt-5 bg-primary text-white gap-3">
+          </motion.div>
+          <motion.button
+            className="flex items-center justify-center rounded px-4 py-2 mt-5 bg-primary text-white gap-3"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            variants={childVariants}
+          >
             <p>Leave us a message</p>
             <FaArrowRight />
-          </button>
-        </form>
-        <div className="flex items-center justify-center bg-amber-300 py-4">
-          <div className="w-full md:w-3/4 flex flex-col md:flex-row gap-5 md:gap-3 items-center justify-center px-4 py-5">
-            <div className="w-full">
+          </motion.button>
+        </motion.form>
+        <motion.div
+          className="flex items-center justify-center bg-amber-300 py-4"
+          variants={childVariants}
+        >
+          <motion.div
+            className="w-full md:w-3/4 flex flex-col md:flex-row gap-5 md:gap-3 items-center justify-center px-4 py-5"
+            variants={childVariants}
+          >
+            <motion.div className="w-full" variants={childVariants}>
               <h2 className="text-xl font-semibold">
                 We are always happy to assist you!
               </h2>
-            </div>
-            <div className="w-full ">
+            </motion.div>
+            <motion.div className="w-full " variants={childVariants}>
               <p className="font-semibold">Email Address</p>
               <div className="border-b-2 w-1/4 mx-auto md:mx-0 hidden md:block mb-2"></div>
               <a
@@ -150,14 +215,14 @@ export default function Contact() {
               >
                 jpt@example.com
               </a>
-            </div>
-            <div className="w-full">
+            </motion.div>
+            <motion.div className="w-full" variants={childVariants}>
               <p className="font-semibold">Number</p>
               <div className="border-b-2 w-1/4 mx-auto md:mx-0 hidden md:block mb-2"></div>
               <p>jpt@example.com</p>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
     )
   );

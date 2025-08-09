@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { motion } from "motion/react";
 
 export default function MissionSection() {
   const api = import.meta.env.VITE_URL;
@@ -70,27 +71,69 @@ export default function MissionSection() {
 
   const showImageSlider = screenWidth > 768;
 
+  // Framer Motion Variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
+  if (loading) return <Loading />; // Display loading component
+  if (error)
+    return <div className="text-red-500 text-center py-8">{error}</div>; // Display error message
+
   return (
-    <div className="container mx-auto px-6 py-8">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center">
+    <motion.div
+      className="container mx-auto px-6 py-8"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={containerVariants}
+    >
+      <motion.h2
+        className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center"
+        variants={childVariants}
+      >
         Our Mission
-      </h2>
-      <p className="text-sm sm:text-base md:text-lg lg:text-xl font-primary text-center leading-relaxed my-8">
+      </motion.h2>
+      <motion.p
+        className="text-sm sm:text-base md:text-lg lg:text-xl font-primary text-center leading-relaxed my-8"
+        variants={childVariants}
+      >
         Driving impact through innovation and a deep commitment to customer
         success.
-      </p>
+      </motion.p>
 
       <div className="lg:flex lg:flex-wrap md:justify-center md:items-start gap-8 px-2">
-        <div
+        <motion.div
           id="leftDiv"
           className=" md:grid grid-cols-3 lg:block lg:w-5/12 mb-6 md:mb-0"
           ref={leftDivRef}
+          variants={childVariants}
         >
           {mission.length > 0 &&
             mission.map((item, idx) => (
-              <div
+              <motion.div
                 className="lg:flex text-center lg:text-left items-center gap-5 my-6 "
                 key={idx}
+                variants={childVariants}
               >
                 <div>
                   <h3 className={`text-md md:text-xl font-semibold mb-1`}>
@@ -98,12 +141,15 @@ export default function MissionSection() {
                   </h3>
                   <p className="text-gray-600 text-base">{item.body}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-        </div>
+        </motion.div>
 
         {showImageSlider && (
-          <div className="md:w-3/5 lg:w-5/12 mb-6 md:mb-0">
+          <motion.div
+            className="md:w-3/5 lg:w-5/12 mb-6 md:mb-0"
+            variants={childVariants}
+          >
             <Swiper
               modules={[Pagination, Autoplay]}
               pagination={{ clickable: true }}
@@ -133,9 +179,9 @@ export default function MissionSection() {
                   </SwiperSlide>
                 ))}
             </Swiper>
-          </div>
+          </motion.div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
