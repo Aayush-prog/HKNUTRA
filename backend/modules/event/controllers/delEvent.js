@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
+const delImage = require("../../../handlers/delImage");
 const delEvent = async (req, res) => {
   const EventModel = mongoose.model("Event");
   const { eventId } = req.params;
+
   try {
     const event = await EventModel.findById(eventId);
     if (!event) {
@@ -10,6 +12,7 @@ const delEvent = async (req, res) => {
         message: "Event not found",
       });
     }
+    delImage(event.image);
     const deletedEvent = await EventModel.findByIdAndDelete(eventId);
     res.status(200).json({
       status: "success",

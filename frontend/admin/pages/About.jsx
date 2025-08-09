@@ -56,6 +56,36 @@ export default function About() {
           initialAlignment={about.subSection2.alignment}
           id={about.subSection2._id}
         />
+        <SubSection
+          initialTitle={about.subSection3.title}
+          initialBody={about.subSection3.body}
+          initialBody2={about.subSection3.body2}
+          initialImages={about.subSection3.images}
+          initialImage={about.subSection3.image}
+          initialVariant={about.subSection3.variant}
+          initialAlignment={about.subSection3.alignment}
+          id={about.subSection3._id}
+        />
+        <SubSection
+          initialTitle={about.subSection4.title}
+          initialBody={about.subSection4.body}
+          initialBody2={about.subSection4.body2}
+          initialImages={about.subSection4.images}
+          initialImage={about.subSection4.image}
+          initialVariant={about.subSection4.variant}
+          initialAlignment={about.subSection4.alignment}
+          id={about.subSection4._id}
+        />
+        <SubSection
+          initialTitle={about.subSection5.title}
+          initialBody={about.subSection5.body}
+          initialBody2={about.subSection5.body2}
+          initialImages={about.subSection5.images}
+          initialImage={about.subSection5.image}
+          initialVariant={about.subSection5.variant}
+          initialAlignment={about.subSection5.alignment}
+          id={about.subSection5._id}
+        />
       </div>
     )
   );

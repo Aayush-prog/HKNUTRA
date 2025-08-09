@@ -4,8 +4,8 @@ const delImage = require("../../../handlers/delImage");
 const editMission = async (req, res) => {
   const MissionModel = mongoose.model("Mission");
   const { title, body, icon, color, imageDeleted } = req.body;
-  const newImage = req.files?.newImage?.[0]
-    ? path.basename(req.files.newImage[0].path)
+  const newImage = req.files?.image?.[0]
+    ? path.basename(req.files.image[0].path)
     : null;
   const { missionId } = req.params;
   try {
@@ -18,15 +18,16 @@ const editMission = async (req, res) => {
     }
     let updatedMission;
 
-    if (imageDeleted === "true" || newImage != null) {
+    if (imageDeleted === "true" || newImage) {
       delImage(mission.image);
       updatedMission = await MissionModel.findByIdAndUpdate(missionId, {
         title,
-        newImage,
+        image: newImage,
         body,
         icon,
         color,
       });
+      console.log("Mission updated with new image:", updatedMission);
     } else {
       updatedMission = await MissionModel.findByIdAndUpdate(missionId, {
         title,

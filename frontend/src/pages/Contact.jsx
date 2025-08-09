@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import HeroSection from "../components/HeroSection";
-import { FaArrowRight, FaFacebook, FaInstagram } from "react-icons/fa";
+import {
+  FaArrowRight,
+  FaFacebook,
+  FaInstagram,
+  FaYoutube,
+} from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -89,25 +94,25 @@ export default function Contact() {
             variants={childVariants}
           >
             <motion.a
-              href="#"
+              href="https://www.facebook.com/hknutra"
               className="hover:text-blue-600"
               whileHover={{ scale: 1.1 }}
             >
               <FaFacebook />
             </motion.a>
             <motion.a
-              href="#"
+              href="https://www.instagram.com/hk_nutra?igsh=MWc2aTZycjRoaWdqOQ=="
               className="hover:text-pink-600"
               whileHover={{ scale: 1.1 }}
             >
               <FaInstagram />
             </motion.a>
             <motion.a
-              href="#"
+              href="https://youtube.com/@hknepalese?si=9ADTQFP8Wekr2zzQ"
               className="hover:text-blue-400"
               whileHover={{ scale: 1.1 }}
             >
-              <FaXTwitter />
+              <FaYoutube />
             </motion.a>
           </motion.div>
         </motion.div>
@@ -213,13 +218,13 @@ export default function Contact() {
                 href={`mailto:jpt@example.com`}
                 className="text-blue-500 hover:underline"
               >
-                jpt@example.com
+                official@hknutra.com
               </a>
             </motion.div>
             <motion.div className="w-full" variants={childVariants}>
               <p className="font-semibold">Number</p>
               <div className="border-b-2 w-1/4 mx-auto md:mx-0 hidden md:block mb-2"></div>
-              <p>jpt@example.com</p>
+              <p>+85268443741</p>
             </motion.div>
           </motion.div>
         </motion.div>

@@ -6,6 +6,8 @@ const pageSchema = new mongoose.Schema(
     subSection1: { type: mongoose.Schema.ObjectId, ref: "SubSection" },
     subSection2: { type: mongoose.Schema.ObjectId, ref: "SubSection" },
     subSection3: { type: mongoose.Schema.ObjectId, ref: "SubSection" },
+    subSection4: { type: mongoose.Schema.ObjectId, ref: "SubSection" },
+    subSection5: { type: mongoose.Schema.ObjectId, ref: "SubSection" },
     type: {
       type: String,
       enum: [

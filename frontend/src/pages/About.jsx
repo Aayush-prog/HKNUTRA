@@ -53,6 +53,33 @@ export default function About() {
           variant={about.subSection2.variant}
           alignment={about.subSection2.alignment}
         />
+        <SubSection
+          title={about.subSection3.title}
+          body={about.subSection3.body}
+          body2={about.subSection3.body2}
+          images={about.subSection3.images}
+          image={about.subSection3.image}
+          variant={about.subSection3.variant}
+          alignment={about.subSection3.alignment}
+        />
+        <SubSection
+          title={about.subSection4.title}
+          body={about.subSection4.body}
+          body2={about.subSection4.body2}
+          images={about.subSection4.images}
+          image={about.subSection4.image}
+          variant={about.subSection4.variant}
+          alignment={about.subSection4.alignment}
+        />
+        <SubSection
+          title={about.subSection5.title}
+          body={about.subSection5.body}
+          body2={about.subSection5.body2}
+          images={about.subSection5.images}
+          image={about.subSection5.image}
+          variant={about.subSection5.variant}
+          alignment={about.subSection5.alignment}
+        />
       </div>
     )
   );

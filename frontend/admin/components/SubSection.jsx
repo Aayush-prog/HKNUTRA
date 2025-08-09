@@ -382,6 +382,14 @@ export default function SubSection({
             variant === "green" ? "bg-green-300 text-white" : "text-black"
           }`}
         >
+          <div className="absolute top-4 right-4 z-10">
+            <button
+              onClick={toggleEdit}
+              className="p-2 rounded-full bg-white text-black hover:bg-gray-200 shadow"
+            >
+              <FaPen size={18} />
+            </button>
+          </div>
           {/* Text on the Left */}
           <div className="w-full sm:w-1/2 flex flex-col items-center sm:order-1">
             {title && (

@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import HeroSection from "../components/HeroSection";
 import { FaArrowRight, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import axios from "axios";
 
@@ -52,14 +53,23 @@ export default function Contact() {
             </p>
           </div>
           <div className="flex flex-row md:flex-col gap-4 text-3xl md:text-xl">
-            <a href="#" className="hover:text-blue-600">
+            <a
+              href="https://www.facebook.com/hknutra"
+              className="hover:text-blue-600"
+            >
               <FaFacebook />
             </a>
-            <a href="#" className="hover:text-pink-600">
+            <a
+              href="https://www.instagram.com/hk_nutra?igsh=MWc2aTZycjRoaWdqOQ%3D%3D"
+              className="hover:text-pink-600"
+            >
               <FaInstagram />
             </a>
-            <a href="#" className="hover:text-blue-400">
-              <FaXTwitter />
+            <a
+              href="https://www.youtube.com/@hknepalese"
+              className="hover:text-blue-400"
+            >
+              <FaYoutube />
             </a>
           </div>
         </div>
@@ -87,7 +97,7 @@ export default function Contact() {
                 htmlFor="email"
                 className="block text-gray-700 text-base font-bold mb-2"
               >
-                Email Address:
+                Email Address (optional):
               </label>
               <input
                 type="email"
@@ -103,7 +113,7 @@ export default function Contact() {
                 htmlFor="phone"
                 className="block text-gray-700 text-base font-bold mb-2"
               >
-                Phone Number (optional):
+                Phone Number:
               </label>
               <input
                 type="tel"
@@ -148,13 +158,13 @@ export default function Contact() {
                 href={`mailto:jpt@example.com`}
                 className="text-blue-500 hover:underline"
               >
-                jpt@example.com
+                official@hknutra.com
               </a>
             </div>
             <div className="w-full">
               <p className="font-semibold">Number</p>
               <div className="border-b-2 w-1/4 mx-auto md:mx-0 hidden md:block mb-2"></div>
-              <p>jpt@example.com</p>
+              <p>+85268443741</p>
             </div>
           </div>
         </div>

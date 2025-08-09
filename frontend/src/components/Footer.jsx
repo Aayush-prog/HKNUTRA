@@ -1,4 +1,4 @@
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import Logo from "../assets/logo.png";
 import { motion } from "framer-motion";
 
@@ -51,10 +51,18 @@ export default function Footer() {
             variants={childVariants}
           >
             {[
-              { href: "#", Icon: FaFacebook, label: "Visit our Facebook page" },
-              { href: "#", Icon: FaTwitter, label: "Visit our Twitter page" },
               {
-                href: "#",
+                href: "https://www.facebook.com/hknutra",
+                Icon: FaFacebook,
+                label: "Visit our Facebook page",
+              },
+              {
+                href: "https://youtube.com/@hknepalese?si=9ADTQFP8Wekr2zzQ",
+                Icon: FaYoutube,
+                label: "Visit our Twitter page",
+              },
+              {
+                href: "https://www.instagram.com/hk_nutra?igsh=MWc2aTZycjRoaWdqOQ==",
                 Icon: FaInstagram,
                 label: "Visit our Instagram page",
               },

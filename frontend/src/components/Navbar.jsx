@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, NavLink, Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import Logo from "../assets/logoGreen.png";
+import Logo from "../assets/logo.png";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -12,11 +12,7 @@ export default function Navbar() {
       <nav className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between font-primary text-primary">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img
-            src={Logo}
-            alt="HKNUTRA Logo"
-            className="w-12 h-12 sm:w-14 sm:h-14 mr-3"
-          />
+          <img src={Logo} alt="HKNUTRA Logo" className=" w-15  md:w-22 mr-3" />
           <h2 className="text-lg sm:text-xl font-bold">HKNUTRA</h2>
         </Link>
 

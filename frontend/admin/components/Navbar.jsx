@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, NavLink, Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import Logo from "../assets/logoGreen.png";
+import Logo from "../assets/logo.png";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthContext";
 
