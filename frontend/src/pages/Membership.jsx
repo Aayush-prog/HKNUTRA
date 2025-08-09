@@ -16,7 +16,6 @@ export default function Membership() {
       try {
         const res = await axios.get(`${api}/pages/membership`);
         if (res.status === 200) {
-          console.log(res.data.data);
           setMembership(res.data.data);
         } else {
           setError(res.data.message);
@@ -52,7 +51,7 @@ export default function Membership() {
             publishable-key="pk_live_51RtN7cCxPOPual9LLO4RKxvIzlLcZW9uRWhqBlmgl4XhcDQH3oQOnJzaecn5jhkY2ZM1qAgCQBcTAb1wt0UMAA8N00i5BrmPuX"
           ></stripe-buy-button>
 
-          <div className="bg-[#2B6858] text-white p-4 py-11 rounded-lg w-80 text-center shadow-lg">
+          <div className="bg-[#2B6858] text-white p-4 py-11 rounded-lg w-73 text-center shadow-lg">
             <h2 className="text-lg font-semibold">Honorary Membership</h2>
             <p className="mt-1 text-base font-medium">
               Awarded by Invitation Only
