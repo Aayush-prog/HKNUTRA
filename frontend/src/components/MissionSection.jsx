@@ -136,6 +136,12 @@ export default function MissionSection() {
                 variants={childVariants}
               >
                 <div>
+                  <img
+                    src={`${api}/images/${item.image}`}
+                    loading="lazy"
+                    alt={item.title}
+                    className="md:hidden rounded-lg w-full h-full object-cover shadow-md"
+                  />
                   <h3 className={`text-md md:text-xl font-semibold mb-1`}>
                     {item.title}
                   </h3>
