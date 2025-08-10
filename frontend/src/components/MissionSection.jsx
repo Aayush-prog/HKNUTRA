@@ -113,13 +113,6 @@ export default function MissionSection() {
       >
         Our Mission
       </motion.h2>
-      <motion.p
-        className="text-sm sm:text-base md:text-lg lg:text-xl font-primary text-center leading-relaxed my-8"
-        variants={childVariants}
-      >
-        Driving impact through innovation and a deep commitment to customer
-        success.
-      </motion.p>
 
       <div className="lg:flex lg:flex-wrap md:justify-center md:items-start gap-8 px-2">
         <motion.div

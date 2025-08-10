@@ -260,10 +260,6 @@ export default function MissionSection() {
       <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center">
         Our Mission
       </h2>
-      <p className="text-sm sm:text-base md:text-lg lg:text-xl font-primary text-center leading-relaxed my-8">
-        Driving impact through innovation and a deep commitment to customer
-        success.
-      </p>
 
       <div className="flex justify-end mb-4">
         {!isAdding && editingIndex === null && (
