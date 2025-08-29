@@ -256,7 +256,7 @@ export default function Contact() {
               <p className="font-semibold">Email Address</p>
               <div className="border-b-2 w-1/4 mx-auto md:mx-0 hidden md:block mb-2"></div>
               <a
-                href={`mailto:jpt@example.com`}
+                href={`mailto:official@hknutra.com`}
                 className="text-blue-500 hover:underline"
               >
                 official@hknutra.com
