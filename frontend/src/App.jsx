@@ -53,7 +53,7 @@ function App() {
           <Route path="community" element={<AdminCommunity />} />
           <Route path="community/:id" element={<AdminPostDetail />} />
           <Route path="contact" element={<AdminContact />} />
-          <Route path="/team" element={<Home />} />
+          <Route path="team" element={<AdminHome />} />
         </Route>
       </>
     )

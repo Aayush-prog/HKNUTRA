@@ -29,7 +29,7 @@ export default function Navbar() {
             // { to: "/admin/membership", label: "Membership" },
             { to: "/admin/events", label: "Events" },
             { to: "/admin/community", label: "Community" },
-            { to: "/team", label: "Team" },
+            { to: "/admin/team", label: "Team" },
             { to: "/admin/contact", label: "Contact" },
           ].map(({ to, label }) => (
             <li key={label}>
@@ -72,7 +72,7 @@ export default function Navbar() {
               // { to: "/admin/membership", label: "Membership" },
               { to: "/admin/events", label: "Events" },
               { to: "/admin/community", label: "Community" },
-              { to: "/team", label: "Team" },
+              { to: "/admin/team", label: "Team" },
               { to: "/admin/contact", label: "Contact" },
             ].map(({ to, label }) => (
               <li key={label}>
