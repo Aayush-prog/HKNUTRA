@@ -41,7 +41,7 @@ export default function Membership() {
         />
         <MembershipReason />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center py-10 md:max-w-5xl mx-auto">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 place-items-center py-10 md:max-w-5xl mx-auto">
           <stripe-buy-button
             buy-button-id="buy_btn_1Ru9hGCxPOPual9LLKrBEVs5"
             publishable-key="pk_live_51RtN7cCxPOPual9LLO4RKxvIzlLcZW9uRWhqBlmgl4XhcDQH3oQOnJzaecn5jhkY2ZM1qAgCQBcTAb1wt0UMAA8N00i5BrmPuX"
@@ -66,7 +66,7 @@ export default function Membership() {
               Granted in Recognition of Service
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     )
   );
