@@ -32,13 +32,14 @@ function App() {
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/membership" element={<Membership />} />
+          {/* <Route path="/membership" element={<Membership />} /> */}
           <Route path="/events" element={<Events />} />
           <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/community" element={<Community />} />
           <Route path="/community/:id" element={<PostDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/team" element={<Home />} />
         </Route>
         <Route
           path="/admin"
@@ -46,12 +47,13 @@ function App() {
         >
           <Route index element={<AdminHome />} />
           <Route path="about" element={<AdminAbout />} />
-          <Route path="membership" element={<AdminMembership />} />
+          {/* <Route path="membership" element={<AdminMembership />} /> */}
           <Route path="events" element={<AdminEvents />} />
           <Route path="events/:id" element={<AdminEventDetail />} />
           <Route path="community" element={<AdminCommunity />} />
           <Route path="community/:id" element={<AdminPostDetail />} />
           <Route path="contact" element={<AdminContact />} />
+          <Route path="/team" element={<Home />} />
         </Route>
       </>
     )
