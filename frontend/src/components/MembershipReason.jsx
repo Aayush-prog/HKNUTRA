@@ -61,12 +61,12 @@ export default function MembershipReason() {
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
     >
-      <motion.h2
+      {/* <motion.h2
         className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center"
         variants={childVariants}
       >
         More Than a Membership
-      </motion.h2>
+      </motion.h2> */}
 
       <div className="lg:flex lg:flex-wrap md:justify-center md:items-start gap-8">
         <div

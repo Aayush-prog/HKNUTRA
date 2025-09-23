@@ -173,9 +173,9 @@ export default function MembershipReason() {
 
   return (
     <div className="container mx-auto px-6 py-8">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center">
+      {/* <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary font-secondary text-center">
         More Than a Membership
-      </h2>
+      </h2> */}
 
       {/* Add Button for creating new reasons */}
       <div className="flex justify-end my-4">
