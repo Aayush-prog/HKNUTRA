@@ -71,23 +71,49 @@ export default function HeroSection(props) {
               </motion.h1>
 
               <motion.p
-                className="text-base sm:text-lg md:text-2xl mb-6 md:mb-8 tracking-[2px] uppercase font-bold px-4 max-w-2xl"
-                style={{ color: "#96A6EA" }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
-                The <span className="italic" style={{ color: "#FF8FA3" }}>Ultimate</span> Endurance Challenge
-              </motion.p>
-
-              <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.7 }}
                 className="text-slate-400 text-sm md:text-base mb-8 max-w-xl mx-auto"
               >
-                Experience an ultra-endurance race set in Hong Kong's highland scenery, inspired by Nepal's formidable trails.
+                Experience an ultra-endurance race set in Hong Kong's highland
+                scenery, inspired by Nepal's formidable trails.
               </motion.p>
+
+              {/* Race distances */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="flex items-center gap-6 md:gap-10 mb-8"
+              >
+                <div className="text-center">
+                  <div
+                    className="text-3xl md:text-5xl font-black tracking-tight"
+                    style={{ color: "#FF8FA3" }}
+                  >
+                    50 KM
+                  </div>
+                  <div className="text-xs md:text-sm text-slate-400 uppercase tracking-wider mt-1">
+                    Ultra Trail
+                  </div>
+                </div>
+                <div
+                  className="h-12 w-px"
+                  style={{ backgroundColor: "#96A6EA" }}
+                ></div>
+                <div className="text-center">
+                  <div
+                    className="text-3xl md:text-5xl font-black tracking-tight"
+                    style={{ color: "#FF8FA3" }}
+                  >
+                    12 KM
+                  </div>
+                  <div className="text-xs md:text-sm text-slate-400 uppercase tracking-wider mt-1">
+                    Trail Run
+                  </div>
+                </div>
+              </motion.div>
 
               <motion.a
                 initial={{ opacity: 0, y: 20 }}
@@ -106,27 +132,14 @@ export default function HeroSection(props) {
                   className="relative block -skew-x-12 px-10 py-4 hover:-translate-y-0.5 transition-transform border border-white/10"
                   style={{ backgroundColor: "#FF8FA3" }}
                 >
-                  <span className="block font-black italic uppercase tracking-widest text-sm md:text-lg" style={{ color: "#0a193c" }}>
-                    Registration
+                  <span
+                    className="block font-black italic uppercase tracking-widest text-sm md:text-lg"
+                    style={{ color: "#0a193c" }}
+                  >
+                    Learn More
                   </span>
                 </span>
               </motion.a>
-
-              <motion.div
-                className="mt-10 bg-black/30 backdrop-blur-md px-6 py-2 border border-white/10 -skew-x-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 1.1 }}
-              >
-                <div className="skew-x-6">
-                  <span className="text-[10px] md:text-xs uppercase text-gray-400 tracking-wider block">
-                    Organized By
-                  </span>
-                  <strong className="text-xs md:text-sm tracking-wide" style={{ color: "#FF8FA3" }}>
-                    HKNUTRA
-                  </strong>
-                </div>
-              </motion.div>
             </div>
           </div>
         </SwiperSlide>
