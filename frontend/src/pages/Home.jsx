@@ -27,8 +27,9 @@ function HimalayanHarmonyBanner() {
                 Himalayan <span className="text-yellow-400">Harmony</span>
               </h2>
               <p className="text-gray-300 text-lg mb-6">
-                Experience the ultimate trail running adventure through the majestic Himalayas.
-                Challenge yourself and be part of something extraordinary.
+                Experience the ultimate trail running adventure through the
+                majestic Himalayas. Challenge yourself and be part of something
+                extraordinary.
               </p>
               <a
                 href="https://himalayanharmony.hknutra.com/"
@@ -43,7 +44,12 @@ function HimalayanHarmonyBanner() {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </a>
             </div>
@@ -51,12 +57,16 @@ function HimalayanHarmonyBanner() {
             {/* Race Distances */}
             <div className="flex lg:flex-col gap-6 text-center">
               <div>
-                <div className="text-3xl md:text-4xl font-bold text-yellow-400">50 KM</div>
+                <div className="text-3xl md:text-4xl font-bold text-yellow-400">
+                  50 KM
+                </div>
                 <div className="text-sm text-gray-400">Ultra Trail</div>
               </div>
               <div className="w-px lg:w-full lg:h-px bg-gray-600"></div>
               <div>
-                <div className="text-3xl md:text-4xl font-bold text-yellow-400">12 KM</div>
+                <div className="text-3xl md:text-4xl font-bold text-yellow-400">
+                  12 KM
+                </div>
                 <div className="text-sm text-gray-400">Trail Run</div>
               </div>
             </div>
@@ -94,9 +104,6 @@ export default function Home() {
   if (loading) return <Loading />;
   return (
     <div>
-      {/* Himalayan Harmony Race Highlight */}
-      <HimalayanHarmonyBanner />
-
       {home && (
         <>
           <HeroSection
@@ -113,6 +120,8 @@ export default function Home() {
             alignment={home.subSection1.alignment}
           />
           <MissionSection />
+          {/* Himalayan Harmony Race Highlight */}
+          <HimalayanHarmonyBanner />
           <UpcomingEvents />
         </>
       )}
