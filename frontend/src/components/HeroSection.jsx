@@ -4,6 +4,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import HeroBg from "../assets/hero-bg.png";
 
 export default function HeroSection(props) {
   const { image, title } = props;
@@ -29,92 +30,103 @@ export default function HeroSection(props) {
         {/* Slide 1: Himalayan Harmony */}
         <SwiperSlide>
           <div
-            className="relative w-full h-full flex items-center justify-center"
-            style={{ backgroundColor: "#1F2344" }}
+            className="relative w-full h-full flex items-center justify-center overflow-hidden"
+            style={{ backgroundColor: "#0a193c" }}
           >
-            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-              <motion.span
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="inline-block text-white font-bold text-sm md:text-base px-4 py-2 rounded-full uppercase tracking-wider mb-6"
-                style={{ backgroundColor: "#FF8FA3" }}
-              >
-                Upcoming Race
-              </motion.span>
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a193c]/20 to-[#0a193c] z-10"></div>
+
+            {/* Background image */}
+            <motion.img
+              src={HeroBg}
+              alt="Trail Runner on Ridge"
+              className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-80 mix-blend-overlay"
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+            />
+
+            <div className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-4 leading-none drop-shadow-2xl text-white tracking-tighter"
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4"
+                transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <span className="text-slate-300">HIMALAYAN</span>
-                <br />
-                <span style={{ color: "#96A6EA" }}>HARMONY</span>
+                HIMALAYAN
+                <motion.span
+                  className="block transform -skew-x-6"
+                  style={{
+                    background: "linear-gradient(to right, #FF8FA3, #96A6EA)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    backgroundClip: "text",
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  HARMONY
+                </motion.span>
               </motion.h1>
+
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-slate-300 text-lg md:text-xl mb-2 max-w-2xl mx-auto uppercase tracking-wide"
+                className="text-base sm:text-lg md:text-2xl mb-6 md:mb-8 tracking-[2px] uppercase font-bold px-4 max-w-2xl"
+                style={{ color: "#96A6EA" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
               >
                 The <span className="italic" style={{ color: "#FF8FA3" }}>Ultimate</span> Endurance Challenge
               </motion.p>
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
                 className="text-slate-400 text-sm md:text-base mb-8 max-w-xl mx-auto"
               >
                 Experience an ultra-endurance race set in Hong Kong's highland scenery, inspired by Nepal's formidable trails.
               </motion.p>
-              <motion.div
+
+              <motion.a
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8"
-              >
-                <div className="flex items-center gap-8">
-                  <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold" style={{ color: "#FF8FA3" }}>
-                      50 KM
-                    </div>
-                    <div className="text-sm text-slate-400">Ultra Trail</div>
-                  </div>
-                  <div className="w-px h-12 bg-slate-600"></div>
-                  <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold" style={{ color: "#FF8FA3" }}>
-                      12 KM
-                    </div>
-                    <div className="text-sm text-slate-400">Trail Run</div>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.a
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
                 href="https://himalayanharmony.hknutra.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:opacity-90"
-                style={{ backgroundColor: "#FF8FA3" }}
+                className="relative group inline-block"
               >
-                <span>Register Now</span>
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <span
+                  className="absolute inset-0 -skew-x-12 translate-x-1.5 translate-y-1.5 border border-white/10"
+                  style={{ backgroundColor: "#2a6bf2" }}
+                ></span>
+                <span
+                  className="relative block -skew-x-12 px-10 py-4 hover:-translate-y-0.5 transition-transform border border-white/10"
+                  style={{ backgroundColor: "#FF8FA3" }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
+                  <span className="block font-black italic uppercase tracking-widest text-sm md:text-lg" style={{ color: "#0a193c" }}>
+                    Registration
+                  </span>
+                </span>
               </motion.a>
+
+              <motion.div
+                className="mt-10 bg-black/30 backdrop-blur-md px-6 py-2 border border-white/10 -skew-x-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1.1 }}
+              >
+                <div className="skew-x-6">
+                  <span className="text-[10px] md:text-xs uppercase text-gray-400 tracking-wider block">
+                    Organized By
+                  </span>
+                  <strong className="text-xs md:text-sm tracking-wide" style={{ color: "#FF8FA3" }}>
+                    HKNUTRA
+                  </strong>
+                </div>
+              </motion.div>
             </div>
           </div>
         </SwiperSlide>
