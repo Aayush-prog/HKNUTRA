@@ -9,7 +9,7 @@ import Loading from "../components/Loading";
 
 function HimalayanHarmonyBanner() {
   return (
-    <div className="bg-gradient-to-r from-primary via-gray-900 to-primary py-12 px-4">
+    <div className=" py-12 px-4">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

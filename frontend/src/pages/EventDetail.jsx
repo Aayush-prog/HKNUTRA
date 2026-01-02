@@ -44,6 +44,28 @@ export default function EventDetail() {
     };
     return date.toLocaleDateString(undefined, options);
   }
+
+  function renderTextWithLinks(text) {
+    if (!text) return null;
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+    return parts.map((part, index) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline hover:text-primary/80"
+          >
+            {part}
+          </a>
+        );
+      }
+      return part;
+    });
+  }
   if (loading) return <Loading />;
 
   if (error) {
@@ -94,7 +116,7 @@ export default function EventDetail() {
         </div>
       </div>
       <div className="text-sm sm:text-base md:text-lg lg:text-xl font-primary leading-relaxed text-center px-4 sm:px-6 md:px-34 flex items-center">
-        <p>{event.body}</p>
+        <p>{renderTextWithLinks(event.body)}</p>
       </div>
       <div className="flex items-center mt-8 md:max-w-8xl justify-center mx-auto lg:mx-30 px-4">
         {event.images && event.images.length > 0 && (
