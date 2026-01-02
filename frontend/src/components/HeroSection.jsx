@@ -28,19 +28,16 @@ export default function HeroSection(props) {
       >
         {/* Slide 1: Himalayan Harmony */}
         <SwiperSlide>
-          <div className="relative w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
-            <div
-              className="absolute inset-0 opacity-20"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23facc15' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-              }}
-            />
+          <div
+            className="relative w-full h-full flex items-center justify-center"
+            style={{ backgroundColor: "#0c1929" }}
+          >
             <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
               <motion.span
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="inline-block bg-yellow-400 text-gray-900 font-bold text-sm md:text-base px-4 py-2 rounded-full uppercase tracking-wider mb-6"
+                className="inline-block bg-pink-500 text-white font-bold text-sm md:text-base px-4 py-2 rounded-full uppercase tracking-wider mb-6"
               >
                 Upcoming Race
               </motion.span>
@@ -48,20 +45,19 @@ export default function HeroSection(props) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4"
+                className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4"
               >
-                Himalayan{" "}
-                <span className="text-yellow-400">Harmony</span>
+                <span className="text-slate-300">HIMALAYAN</span>
+                <br />
+                <span className="text-pink-400">HARMONY</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-gray-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto"
+                className="text-slate-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto uppercase tracking-wide"
               >
-                Experience the ultimate trail running adventure through the
-                majestic Himalayas. Challenge yourself and be part of something
-                extraordinary.
+                The <span className="text-pink-400 italic">Ultimate</span> Endurance Challenge
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -71,17 +67,17 @@ export default function HeroSection(props) {
               >
                 <div className="flex items-center gap-8">
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold text-yellow-400">
+                    <div className="text-3xl md:text-4xl font-bold text-pink-400">
                       50 KM
                     </div>
-                    <div className="text-sm text-gray-400">Ultra Trail</div>
+                    <div className="text-sm text-slate-400">Ultra Trail</div>
                   </div>
-                  <div className="w-px h-12 bg-gray-600"></div>
+                  <div className="w-px h-12 bg-slate-600"></div>
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold text-yellow-400">
+                    <div className="text-3xl md:text-4xl font-bold text-pink-400">
                       12 KM
                     </div>
-                    <div className="text-sm text-gray-400">Trail Run</div>
+                    <div className="text-sm text-slate-400">Trail Run</div>
                   </div>
                 </div>
               </motion.div>
@@ -92,9 +88,9 @@ export default function HeroSection(props) {
                 href="https://himalayanharmony.hknutra.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                className="inline-flex items-center gap-2 bg-pink-500 hover:bg-pink-600 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
-                <span>Learn More & Register</span>
+                <span>Register Now</span>
                 <svg
                   className="w-5 h-5"
                   fill="none"
@@ -139,12 +135,12 @@ export default function HeroSection(props) {
           opacity: 0.5;
         }
         .hero-swiper .swiper-pagination-bullet-active {
-          background: #facc15;
+          background: #ec4899;
           opacity: 1;
         }
         .hero-swiper .swiper-button-next,
         .hero-swiper .swiper-button-prev {
-          color: #facc15;
+          color: #ec4899;
         }
         .hero-swiper .swiper-button-next:after,
         .hero-swiper .swiper-button-prev:after {
