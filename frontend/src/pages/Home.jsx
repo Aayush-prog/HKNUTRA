@@ -38,6 +38,7 @@ export default function Home() {
           <HeroSection
             title={home.heroSection.title}
             image={home.heroSection.image}
+            showHimalayanHarmony={true}
           />
           <SubSection
             title={home.subSection1.title}

@@ -36,6 +36,7 @@ export default function Events() {
         <HeroSection
           title={event.heroSection.title}
           image={event.heroSection.image}
+          showHimalayanHarmony={true}
         />
         <SubSection
           title={event.subSection1.title}
