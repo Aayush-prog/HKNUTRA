@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, NavLink, Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Logo from "../assets/logo.png";
+import HarmonyLogo from "../assets/harmony.png";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -10,11 +11,22 @@ export default function Navbar() {
   return (
     <header className="bg-white fixed top-0 left-0 w-full shadow z-50">
       <nav className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between font-primary text-primary">
-        {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <img src={Logo} alt="HKNUTRA Logo" className=" w-15  md:w-22 mr-3" />
-          <h2 className="text-4xl sm:text-2xl font-bold">HKNUTRA</h2>
-        </Link>
+        {/* Logos */}
+        <div className="flex items-center">
+          <Link to="/" className="flex items-center">
+            <img src={Logo} alt="HKNUTRA Logo" className="w-15 md:w-22 mr-3" />
+            <h2 className="hidden md:block text-2xl md:text-3xl font-bold">HKNUTRA</h2>
+          </Link>
+          <div className="h-10 w-px bg-gray-300 mx-4"></div>
+          <a
+            href="https://himalayanharmony.hknutra.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center hover:opacity-80 transition-opacity"
+          >
+            <img src={HarmonyLogo} alt="Himalayan Harmony Logo" className="w-14 md:w-20" />
+          </a>
+        </div>
 
         {/* Desktop menu */}
         <ul className="hidden lg:flex gap-8 lg:gap-12 items-center">
@@ -84,6 +96,18 @@ export default function Navbar() {
                 </NavLink>
               </li>
             ))}
+            <li>
+              <a
+                href="https://himalayanharmony.hknutra.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMenuOpen(false)}
+                className="block transition-colors duration-300 text-yellow-600 font-semibold hover:text-yellow-700"
+                aria-label="Go to Himalayan Harmony website"
+              >
+                Himalayan Harmony
+              </a>
+            </li>
             <li>
               <button
                 onClick={() => {
