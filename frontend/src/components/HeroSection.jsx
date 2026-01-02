@@ -30,14 +30,15 @@ export default function HeroSection(props) {
         <SwiperSlide>
           <div
             className="relative w-full h-full flex items-center justify-center"
-            style={{ backgroundColor: "#0c1929" }}
+            style={{ backgroundColor: "#1F2344" }}
           >
             <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
               <motion.span
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="inline-block bg-pink-500 text-white font-bold text-sm md:text-base px-4 py-2 rounded-full uppercase tracking-wider mb-6"
+                className="inline-block text-white font-bold text-sm md:text-base px-4 py-2 rounded-full uppercase tracking-wider mb-6"
+                style={{ backgroundColor: "#FF8FA3" }}
               >
                 Upcoming Race
               </motion.span>
@@ -49,15 +50,23 @@ export default function HeroSection(props) {
               >
                 <span className="text-slate-300">HIMALAYAN</span>
                 <br />
-                <span className="text-pink-400">HARMONY</span>
+                <span style={{ color: "#FF8FA3" }}>HARMONY</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-slate-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto uppercase tracking-wide"
+                className="text-slate-300 text-lg md:text-xl mb-2 max-w-2xl mx-auto uppercase tracking-wide"
               >
-                The <span className="text-pink-400 italic">Ultimate</span> Endurance Challenge
+                The <span className="italic" style={{ color: "#FF8FA3" }}>Ultimate</span> Endurance Challenge
+              </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="text-slate-400 text-sm md:text-base mb-8 max-w-xl mx-auto"
+              >
+                Experience an ultra-endurance race set in Hong Kong's highland scenery, inspired by Nepal's formidable trails.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -67,14 +76,14 @@ export default function HeroSection(props) {
               >
                 <div className="flex items-center gap-8">
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold text-pink-400">
+                    <div className="text-3xl md:text-4xl font-bold" style={{ color: "#FF8FA3" }}>
                       50 KM
                     </div>
                     <div className="text-sm text-slate-400">Ultra Trail</div>
                   </div>
                   <div className="w-px h-12 bg-slate-600"></div>
                   <div className="text-center">
-                    <div className="text-3xl md:text-4xl font-bold text-pink-400">
+                    <div className="text-3xl md:text-4xl font-bold" style={{ color: "#FF8FA3" }}>
                       12 KM
                     </div>
                     <div className="text-sm text-slate-400">Trail Run</div>
@@ -88,7 +97,8 @@ export default function HeroSection(props) {
                 href="https://himalayanharmony.hknutra.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-pink-500 hover:bg-pink-600 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                className="inline-flex items-center gap-2 text-white font-bold text-lg px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:opacity-90"
+                style={{ backgroundColor: "#FF8FA3" }}
               >
                 <span>Register Now</span>
                 <svg
@@ -135,12 +145,12 @@ export default function HeroSection(props) {
           opacity: 0.5;
         }
         .hero-swiper .swiper-pagination-bullet-active {
-          background: #ec4899;
+          background: #FF8FA3;
           opacity: 1;
         }
         .hero-swiper .swiper-button-next,
         .hero-swiper .swiper-button-prev {
-          color: #ec4899;
+          color: #FF8FA3;
         }
         .hero-swiper .swiper-button-next:after,
         .hero-swiper .swiper-button-prev:after {
