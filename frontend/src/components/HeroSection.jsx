@@ -50,7 +50,7 @@ export default function HeroSection(props) {
               >
                 <span className="text-slate-300">HIMALAYAN</span>
                 <br />
-                <span style={{ color: "#FF8FA3" }}>HARMONY</span>
+                <span style={{ color: "#96A6EA" }}>HARMONY</span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
