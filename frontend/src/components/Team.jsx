@@ -8,21 +8,21 @@ export default function TeamCards() {
       name: "Angbuhang Basant Sean",
       role: "Co-Founder",
       description: "Trail runner and Coach",
-      image: "src/assets/sean.jpeg",
+      image: "../assets/sean.jpeg",
     },
     {
       id: 2,
       name: "Limbu BedhRaj",
       role: "Co-Founder",
       description: "Trail runner and Coach",
-      image: "src/assets/bedhraj.jpeg",
+      image: "../assets/bedhraj.jpeg",
     },
     {
       id: 3,
       name: "Gurung Susma",
       role: "Co-Founder",
       description: "Trail runner and Coach",
-      image: "src/assets/susma.jpeg",
+      image: "../assets/susma.jpeg",
     },
   ];
 
