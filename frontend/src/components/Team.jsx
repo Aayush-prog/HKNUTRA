@@ -5,17 +5,24 @@ export default function TeamCards() {
   const teamMembers = [
     {
       id: 1,
-      name: "Limbu BedhRaj",
+      name: "Angbuhang Basant Sean",
       role: "Co-Founder",
-      description: "Trail runner and coach",
-      image: "../assests/bedhraj.jpg",
+      description: "Trail runner and Coach",
+      image: "src/assets/sean.jpeg",
     },
     {
       id: 2,
+      name: "Limbu BedhRaj",
+      role: "Co-Founder",
+      description: "Trail runner and Coach",
+      image: "src/assets/bedhraj.jpeg",
+    },
+    {
+      id: 3,
       name: "Gurung Susma",
       role: "Co-Founder",
-      description: "Trail runner and coach",
-      image: "../assets/susma.png",
+      description: "Trail runner and Coach",
+      image: "src/assets/susma.jpeg",
     },
   ];
 
@@ -45,7 +52,7 @@ export default function TeamCards() {
       viewport={{ once: true }}
     >
       <motion.div
-        className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
+        className="grid gap-6 sm:grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto"
         variants={containerVariants}
       >
         {teamMembers.map((member) => (
@@ -67,7 +74,9 @@ export default function TeamCards() {
 
             {/* Content */}
             <div className="p-6 text-center">
-              <h3 className="text-2xl font-extrabold">{member.name}</h3>
+              <h3 className="text-2xl font-extrabold text-white">
+                {member.name}
+              </h3>
               <p className="text-green-500 font-semibold mt-1">{member.role}</p>
               <p className="text-gray-600 dark:text-gray-400 mt-3">
                 {member.description}
