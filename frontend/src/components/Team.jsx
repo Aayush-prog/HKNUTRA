@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import seanImg from "@/assets/sean.jpeg";
-import bedhrajImg from "@/assets/bedhraj.jpeg";
-import susmaImg from "@/assets/susma.jpeg";
+import seanImg from "../assets/sean.jpeg";
+import bedhrajImg from "../assets/bedhraj.jpeg";
+import susmaImg from "../assets/susma.jpeg";
 
 export default function TeamCards() {
   const teamMembers = [
