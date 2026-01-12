@@ -4,6 +4,7 @@ import HeroSection from "../components/HeroSection";
 import SubSection from "../components/SubSection";
 import axios from "axios";
 import Posts from "../components/Posts";
+import TeamCards from "../components/Team";
 export default function Community() {
   const [community, setCommunity] = useState();
   const [loading, setLoading] = useState(false);
@@ -45,6 +46,7 @@ export default function Community() {
           variant={community.subSection1.variant}
           alignment={community.subSection1.alignment}
         />
+        <TeamCards />
         <Posts />
       </div>
     )
