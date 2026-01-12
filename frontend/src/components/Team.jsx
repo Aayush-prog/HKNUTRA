@@ -1,5 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
+import seanImg from "@/assets/sean.jpeg";
+import bedhrajImg from "@/assets/bedhraj.jpeg";
+import susmaImg from "@/assets/susma.jpeg";
 
 export default function TeamCards() {
   const teamMembers = [
@@ -8,21 +11,21 @@ export default function TeamCards() {
       name: "Angbuhang Basant Sean",
       role: "Co-Founder",
       description: "Trail runner and Coach",
-      image: "/assets/sean.jpeg",
+      image: seanImg,
     },
     {
       id: 2,
       name: "Limbu BedhRaj",
       role: "Co-Founder",
       description: "Trail runner and Coach",
-      image: "/assets/bedhraj.jpeg",
+      image: bedhrajImg,
     },
     {
       id: 3,
       name: "Gurung Susma",
       role: "Co-Founder",
       description: "Trail runner and Coach",
-      image: "/assets/susma.jpeg",
+      image: susmaImg,
     },
   ];
 
