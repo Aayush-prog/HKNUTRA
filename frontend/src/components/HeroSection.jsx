@@ -128,10 +128,25 @@ export default function HeroSection(props) {
                     className="text-3xl md:text-5xl font-black tracking-tight"
                     style={{ color: "#FF8FA3" }}
                   >
-                    12 KM
+                    26 KM
                   </div>
                   <div className="text-xs md:text-sm text-slate-400 uppercase tracking-wider mt-1">
                     Trail Run
+                  </div>
+                </div>
+                <div
+                  className="h-12 w-px"
+                  style={{ backgroundColor: "#96A6EA" }}
+                ></div>
+                <div className="text-center">
+                  <div
+                    className="text-3xl md:text-5xl font-black tracking-tight"
+                    style={{ color: "#FF8FA3" }}
+                  >
+                    12 KM
+                  </div>
+                  <div className="text-xs md:text-sm text-slate-400 uppercase tracking-wider mt-1">
+                    Family Run
                   </div>
                 </div>
               </motion.div>
