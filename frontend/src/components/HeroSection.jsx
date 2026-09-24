@@ -146,7 +146,7 @@ export default function HeroSection(props) {
                     12 KM
                   </div>
                   <div className="text-xs md:text-sm text-slate-400 uppercase tracking-wider mt-1">
-                    Family Run
+                    Solo & Family Run
                   </div>
                 </div>
               </motion.div>
